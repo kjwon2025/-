@@ -1,0 +1,146 @@
+#footerMP {
+    width: 100%;
+    background-color: #2E5245;
+}
+
+#footerMP #footercon1MP {
+    width: 1440px;
+    height: 135px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#footerMP #footercon1MP .ftHead {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#footerMP #footercon1MP .ftHead>h1 {
+    font-size: 40px;
+    padding-left: 5px;
+    color: #fffef8;
+    width: 80px;
+}
+
+#footerMP #footercon1MP .ftHead>.fthSPAN {
+    position: absolute;
+    left: 130px;
+    bottom: 15px;
+    color: #FFFEF8;
+    font-size: 14px;
+}
+
+#footerMP #footercon1MP .ftHead .fthARCO {
+    width: 50px;
+    color: #fffef8;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#footerMP #footercon1MP .ftHead .fthARCO.rotate {
+    transform: rotate(180deg);
+}
+
+#footerMP #footercon1MP .ftHead .fthSNS {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 180px;
+    height: 50px;
+    margin-left: 1075px;
+    margin-right: 45px;
+}
+
+#footerMP #footercon1MP .ftHead .fthSNS>a>svg,
+#footerMP #footercon1MP .ftHead .fthSNS>svg {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fffef8;
+    cursor: pointer;
+}
+
+#footerMP #footercon1MP .ftHead .fthSNS>svg:nth-child(2) {
+    width: 35px;
+}
+
+#footerMP #footercon1MP .ftHead .fthSNS>svg:nth-child(3) {
+    width: 46px;
+}
+
+.footerlineMP {
+    width: 1440px;
+    height: 1px;
+    background-color: #fffef8;
+    margin: 0 auto;
+}
+
+#footerMP #footerhideMP {
+    max-height: 0;
+    /* 처음엔 숨김 */
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+#footerhideMP.open {
+    max-height: 1000px;
+    /* 충분히 큰 값, 내용 전체가 나오도록 */
+}
+
+#footerMP #footercon2MP {
+    width: 1440px;
+    margin: 0 auto;
+    padding-top: 50px;
+    display: flex;
+}
+
+#footerMP #footercon2MP .ftItem1 {
+    width: 720px;
+    height: 400px;
+    padding-left: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 83px;
+}
+
+#footerMP #footercon2MP .ftItem1 .ftItemSpan {
+    color: #fffef8;
+    font-size: 16px;
+}
+
+#footerMP #footercon2MP .ftItem1 .ftNav {
+    display: flex;
+    gap: 50px;
+}
+
+#footerMP #footercon2MP .ftItem1 .ftNav .ftnBtn {
+    color: #FFFEF8;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#footerMP #footercon2MP .ftItem1 .ftNav .ftnBtn:hover {
+    color: #bbb;
+}
+
+#footerMP #footercon2MP .ftItem2 {
+    width: 720px;
+    height: 450px;
+    padding-right: 100px;
+}
+
+#footerMP #footercon2MP .ftItem2 .ftMap {
+    width: 570px;
+    height: 400px;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFEF8;
+}

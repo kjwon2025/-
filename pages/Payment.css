@@ -1,0 +1,314 @@
+#s1PM {
+    width: 100%;
+    margin-top: 115px;
+    color: #6C5242;
+}
+
+#s1conPM {
+    width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.h1PM {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.conboxPM {
+    width: 100%;
+    border-top: 1px solid #6C5242;
+}
+
+.conboxPM input:focus {
+    border: 1px solid #6C5242;
+}
+
+.h2PM {
+    margin: 50px 0 20px 0;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.subcon1PM {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.sc1iboxPM {
+    width: 250px;
+    height: 300px;
+}
+
+.sc1iboxPM>img {
+    width: 250px;
+    height: 300px;
+}
+
+.sc1infoPM {
+    width: 1190px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+}
+
+.sc1infoPM>span {
+    margin-left: 50px;
+}
+
+.infoboldPM {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.buyformPM {
+    width: 100%;
+}
+
+.h31PM,
+.h32PM,
+.h33PM,
+.h34PM,
+.h35PM,
+.h36PM {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pitbPM,
+.howbPM {
+    display: flex;
+    justify-content: space-between;
+}
+
+.howbPM {
+    border-bottom: 1px solid #6C5242;
+    margin-bottom: 50px;
+}
+
+.picbPM {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.picbPM>input {
+    width: 15px;
+    height: 15px;
+}
+
+.buyinfoPM,
+.sendPM,
+.placeinfoPM,
+.couponPM,
+.paywayPM {
+    border-top: 1px solid #6C5242;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.cpinfoPM {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.pwbtnboxPM {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.pwbtnboxPM>button {
+    width: 50%;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: "Hahmlet", serif;
+    font-optical-sizing: auto;
+    cursor: pointer;
+}
+
+.pwbtn1PM {
+    background-color: #6C5242;
+    color: #FFFEF8;
+}
+
+.pwbtn2PM {
+    background-color: #FFE9E9;
+    color: #6C5242;
+}
+
+.pwcardPM {
+    display: flex;
+    gap: 20px;
+}
+
+.pwcardPM>input {
+    width: 25%;
+    height: 20px;
+    border: 1px solid #bbb;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.buyinfoPM>span,
+.sendPM>span,
+.placeinfoPM>span,
+.couponPM>span,
+.paywayPM>span {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 30px 0 10px 0;
+}
+
+.buyinfoPM>input,
+.sendPM>input {
+    height: 20px;
+    border: 1px solid #bbb;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.placeinfoPM .piidPM,
+.placeinfoPM .piphonePM {
+    height: 20px;
+    border: 1px solid #bbb;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.placeinfoPM .piaddressPM {
+    height: 80px;
+    border: 1px solid #bbb;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.cpcodePM {
+    width: 90%;
+    height: 20px;
+    border: 1px solid #bbb;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.buyinfoPM>input::placeholder,
+.sendPM>input::placeholder,
+.placeinfoPM>input::placeholder,
+.cpcodePM::placeholder {
+    color: #bbb;
+}
+
+.hdivPM {
+    width: 100px;
+    height: 46px;
+    background-color: #6C5242;
+    color: #FFFEF8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+}
+
+.cpinfoPM>button {
+    width: 8%;
+    padding: 8px 0;
+    background-color: #FFE9E9;
+    color: #6C5242;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.canusePM {
+    width: 1420px;
+    height: 80px;
+    margin-top: 40px;
+    padding: 0 10px;
+    border: 1px solid #6C5242;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cuse1PM {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.cuse2PM {
+    font-size: 20px;
+    font-weight: 300;
+    color: #999;
+}
+
+.pwymPM {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.pwymPM>input {
+    width: 50%;
+    height: 20px;
+    border: 1px solid #bbb;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.pwtwoPM {
+    width: 100%;
+    height: 20px;
+    border: 1px solid #bbb;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.pwagreetextPM {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+    border: 1px solid #6C5242;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.pwlastbtnPM {
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    background-color: #6C5242;
+    color: #FFFEF8;
+    font-family: "Hahmlet", serif;
+    font-optical-sizing: auto;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 100px 0;
+    padding: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
