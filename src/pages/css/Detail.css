@@ -1,0 +1,831 @@
+button {
+    font-family: "Hahmlet", serif;
+}
+
+/* 섹션1 */
+
+#section1DT {
+    margin: 115px auto 0 auto;
+    width: 1200px;
+    height: 600px;
+    display: flex;
+    gap: 0;
+}
+
+.flowerpicDT {
+    flex: 1;
+    height: 100%;
+}
+
+.flowerpicDT .flowerpic1DT img {
+    width: 600px;
+    height: 495px;
+    display: block;
+    object-fit: cover;
+}
+
+.flowerpicDT .flowerpicsubDT {
+    width: 600px;
+    height: 142px;
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flowerpicDT .flowerpicsubDT div {
+    width: 142px;
+    height: 142px;
+}
+
+.flowerpicDT .flowerpicsubDT div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flowertextDT {
+    flex: 1;
+    height: 710px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.flowertextinnerDT {
+    width: 535px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.flowertextinnerDT .flowertitleDT {
+    width: 535px;
+    height: 104px;
+    margin-top: -50px;
+    position: relative;
+    border-bottom: 1px solid #6C5242;
+}
+
+.flowertextinnerDT .flowertitleDT .titletextDT {
+    width: 175px;
+    height: 104px;
+    margin: 0 auto;
+    color: #6C5242;
+    font-size: 29px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.priceDT {
+    font-size: 23px;
+}
+
+.flowertextinnerDT .flowertitleDT .titlerightDT {
+    width: 90px;
+    height: 104px;
+    position: absolute;
+    right: 0;
+    top: 25px;
+    color: red;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.flowertextinnerDT .flowerdeliDT {
+    width: 525px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 0 5px;
+    border-bottom: 1px solid #6C5242;
+}
+
+.flowertextinnerDT .flowerdeliDT .deliinnerDT {
+    width: 100%;
+}
+
+.deliinnerDT .innertopDT {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* 좌우 배치 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    padding: 0 0;
+    /* 필요시 좌우 패딩 추가 */
+    position: relative;
+    /* absolute 제거 가능 */
+}
+
+.deliinnerDT .innertopDT .innerleftDT {
+    width: 50%;
+    /* 필요시 */
+    height: auto;
+    font-size: 17px;
+    color: #6C5242;
+    font-weight: 600;
+    text-align: left;
+    line-height: normal;
+    /* flex에 맞게 */
+}
+
+.deliinnerDT .innertopDT .innerrightDT {
+    width: 175px;
+    height: 37px;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.deliinnerDT .innertopDT .innerrightDT button {
+    flex: 1;
+    height: 100%;
+    border: none;
+    font-size: 17px;
+    border-radius: 0;
+}
+
+.deliinnerDT .innertopDT .innerrightDT .rightBtn1DT {
+    background-color: #FFFEF8;
+    border: 1px solid #6C5242;
+    color: #6C5242;
+    font-weight: 600;
+    border-radius: 10px 0 0 10px;
+}
+
+.deliinnerDT .innertopDT .innerrightDT .rightBtn2DT {
+    background-color: #6C5242;
+    border: 1px solid #6C5242;
+    color: #FFFEF8;
+    font-weight: 600;
+    border-radius: 0 10px 10px 0;
+}
+
+.deliinnerDT .innerbottomDT {
+    width: 100%;
+    height: 48px;
+    display: flex;
+}
+
+.innerbottomDT .bottomleftDT {
+    width: 50%;
+    height: 48px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    color: #6C5242;
+    font-weight: 600;
+}
+
+.innerbottomDT .bottomrightDT {
+    width: 50%;
+    height: 48px;
+    display: flex;
+    /* Flex 컨테이너 활성화 */
+    justify-content: flex-end;
+    /* 오른쪽 정렬 */
+    align-items: center;
+    /* 세로 가운데 정렬 */
+    font-size: 17px;
+    color: #6C5242;
+    font-weight: 600;
+}
+
+.flowertextinnerDT .floweroptDT {
+    width: 525px;
+    height: 160px;
+    padding: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #6C5242;
+}
+
+.optcenterDT {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.centertopDT,
+.centerbottomDT {
+    width: 100%;
+    height: 50%;
+    display: flex;
+}
+
+.centertopleftDT,
+.centertoprightDT,
+.centerbottomleftDT,
+.centerbottomrightDT {
+    width: 50%;
+    height: 100%;
+}
+
+.centertopleftDT {
+    font-size: 17px;
+    color: #6C5242;
+    font-weight: 600;
+    text-align: left;
+}
+
+.centertoprightDT {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.centerbottomleftDT {
+    font-size: 17px;
+    color: #6C5242;
+    font-weight: 600;
+    text-align: left;
+}
+
+.centerbottomrightDT {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 15px;
+    color: #6C5242;
+}
+
+.vaseDT {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.optcenterDT .centertopDT,
+.optcenterDT .centerbottomDT {
+    width: 100%;
+    height: 50%;
+}
+
+.flowertextinnerDT .flowertotalDT {
+    width: 525px;
+    height: 160px;
+    padding: 0 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.totalleftDT,
+.totalrightDT {
+    flex: 1;
+    height: 100%;
+    margin-top: 60px;
+}
+
+.totalleftDT {
+    font-size: 17px;
+    font-weight: 600;
+    color: #6C5242;
+    text-align: left;
+}
+
+.totalrightDT {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #6C5242;
+}
+
+.flowerbuttonDT {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: 92px;
+}
+
+.cartbuttonDT {
+    flex: 1;
+    background-color: #FFE9E9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #6C5242;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.buybuttonDT {
+    flex: 1;
+    background-color: #6C5242;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFFEF8;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* 메리골드위시, 옵션추가 수량 버튼 */
+.countbutton1DT,
+.countbutton2DT {
+    display: flex;
+    align-items: center;
+    border: 1px solid #6C5242;
+    border-radius: 4px;
+    overflow: hidden;
+    font-family: 'Hahmlet', serif;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+.countbutton1DT button,
+.countbutton2DT button {
+    width: 30px;
+    height: 28px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    color: #6C5242;
+}
+
+.countbutton1DT .countDT,
+.countbutton2DT .countDT {
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: #6C5242;
+}
+
+/* 섹션2 */
+#section2DT {
+    width: 1200px;
+    margin: 230px auto 160px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flowerguideDT img {
+    width: 1200px;
+    height: 425px;
+}
+
+/* 섹션3 */
+#section3DT {
+    width: 1200px;
+    height: 4288px;
+    margin: 0 auto;
+}
+
+.sec3titleboxDT {
+    width: 1200px;
+    height: 30px;
+    display: flex;
+}
+
+.sec3titleleftDT,
+.sec3titlerightDT {
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+}
+
+.sec3titleleftDT {
+    border-bottom: 1px solid #6C5242;
+    color: #6C5242;
+    font-weight: 600;
+}
+
+.sec3titlerightDT {
+    border-bottom: 1px solid #bbb;
+    color: #999;
+    cursor: pointer;
+}
+
+.detail1DT {
+    width: 1200px;
+    height: 467px;
+    display: flex;
+    margin-top: 100px;
+}
+
+.detail1DT .detail1leftDT {
+    width: 600px;
+    height: 467px;
+}
+
+.detail1leftDT .detail1topDT {
+    width: 600px;
+    height: 200px;
+    color: #6C5242;
+    font-size: 25px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.detail1leftDT .detail1bottomDT {
+    width: 600px;
+    height: 150px;
+    color: #6C5242;
+    text-align: center;
+    font-size: 17px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.detail1DT .detail1rightDT img {
+    width: 600px;
+    height: 358px;
+    margin-top: 31px;
+}
+
+.detail2DT {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 325px;
+}
+
+.detail2DT .detail2innerDT {
+    width: 1200px;
+    height: 434px;
+    display: flex;
+}
+
+.detail2innerleftDT {
+    width: 600px;
+    height: 434px;
+    /* 필요시 추가 */
+}
+
+.detail2innerleftDT img {
+    width: 100%;
+    height: auto;
+    /* 비율 유지 */
+    display: block;
+}
+
+.detail2innerrightDT .detail2topDT {
+    width: 600px;
+    height: 46px;
+    font-size: 25px;
+    color: #6C5242;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.detail2innerrightDT .detail2bottomDT {
+    width: 600px;
+    height: 280px;
+    font-size: 17px;
+    color: #6C5242;
+    text-align: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.detail3DT {
+    width: 1200px;
+    height: 1677px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.detail3DT .detail3innerDT {
+    width: 1200px;
+    height: 1289px;
+}
+
+.detail3innerDT .detail3topDT img {
+    width: 1200px;
+    height: 836px;
+}
+
+.detail3innerDT .detail3bottomDT {
+    width: 1200px;
+    height: 285px;
+}
+
+.detail3titleDT {
+    text-align: center;
+    color: #6C5242;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.detail3contentDT {
+    text-align: center;
+    color: #6C5242;
+    font-size: 17px;
+}
+
+.detail3noticeDT {
+    width: 1200px;
+    height: 949px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.detail3noticeDT .detail3noticeinnerDT {
+    width: 1200px;
+    height: 628px;
+    font-size: 12px;
+    /* 너무 작아서 -4px만 줄임 */
+    color: #6C5242;
+    text-align: left;
+}
+
+.detail3noticetitleDT {
+    font-size: 14px;
+    /* 너무 작아서 -4px만 줄임 */
+    color: #6C5242;
+    font-weight: 600;
+}
+
+/* 섹션4 */
+.detail4DT {
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detail4DT .detail4innerDT {
+    width: 1200px;
+    height: 399px;
+}
+
+.detail4innerDT .detail4topDT {
+    width: 1200px;
+    height: 61px;
+    font-size: 25px;
+    font-weight: 600;
+    color: #6C5242;
+}
+
+.detail4innerDT .detail4middleDT {
+    width: 1200px;
+    height: 240px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail4innerDT .detail4middleDT .boxDT {
+    width: 240px;
+    height: 240px;
+    background-color: gray;
+}
+
+.detail4innerDT .detail4bottomDT {
+    width: 1200px;
+    height: 68px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail4innerDT .detail4bottomDT .cellDT {
+    width: 240px;
+    height: 68px;
+    color: #6C5242;
+    text-align: center;
+    font-size: 13px;
+}
+
+.modalRV {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1501;
+    display: flex;
+}
+
+.modal-overlayRV {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-contentRV {
+    width: 100%;
+    max-width: 1440px;
+    height: 90%;
+    background-color: #FFFEF8;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+}
+
+.modal-headerRV {
+    position: relative;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #FFFEF8;
+    border-bottom: 1px solid #ddd;
+}
+
+.close-btnRV {
+    cursor: pointer;
+    font-size: 24px;
+    padding-top: 7px;
+}
+
+.close-btnRV>svg {
+    width: 25px;
+}
+
+/* 리뷰 박스, 아이템 등은 그대로 유지 */
+.reviewboxallRV {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px 20px 20px;
+}
+
+.review-itemRV {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.review-textRV {
+    flex: 1;
+    color: #6C5242;
+}
+
+.review-authorRV {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 5px 0 20px 30px;
+}
+
+.review-contentRV {
+    margin-left: 30px;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.review-dateRV {
+    font-size: 12px;
+    color: #999;
+    margin: 10px 10px 0 0;
+}
+
+.review-inputRV {
+    display: flex;
+    padding: 5px 20px 30px 20px;
+    align-items: flex-start;
+    margin-top: 10px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.review-userRV {
+    padding-left: 197px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.review-conRV {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+    align-items: end;
+    position: relative;
+}
+
+.file-boxRV {
+    width: 170px;
+    height: 253px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+}
+
+.file-infoRV {
+    width: 147px;
+    height: 120px;
+    border: 1px solid #6C5242;
+    font-size: 14px;
+    font-weight: 400;
+    color: #2b2b2b;
+    padding: 5px 10px;
+}
+
+.file-btnRV {
+    width: 130px;
+    height: 50px;
+    background-color: #6C5242;
+    color: #FFFEF8;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 50px;
+    margin-top: 15px;
+}
+
+.text-area-wrap {
+    display: flex;
+    flex-direction: column;
+    margin-left: 192px;
+}
+
+.text-area-wrap textarea {
+    width: 1186px;
+    height: 110px;
+    resize: none;
+    padding: 10px;
+    background-color: #FFFEF8;
+    border: 1px solid #6C5242;
+    color: #6C5242;
+    font-family: "Hahmlet", serif;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.submit-btnRV {
+    width: 150px;
+    height: 50px;
+    background-color: #6C5242;
+    color: #FFFEF8;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-top: 15px;
+}
+
+.review-paginationRV {
+    margin: 5px 0 0 0;
+    text-align: center;
+}
+
+.review-paginationRV button {
+    margin: 0 3px;
+    padding: 3px 8px;
+    cursor: pointer;
+    color: #6C5242;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.review-paginationRV button.active {
+    color: #6C5242;
+    font-weight: 800;
+}
+
+.review-itemRV img {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+}
