@@ -1,0 +1,60 @@
+#hdmsinputMP {
+    position: fixed;
+    top: 144px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 0 40px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: #FFFEF8;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    border: 1px solid #6C5242;
+}
+
+#hdmsinputMP.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+#hdmsinputMP #hdmsboxMP>input {
+    width: 500px;
+    height: 40px;
+    margin-top: 20px;
+    padding: 0 2px;
+    border-bottom: 2px solid #6C5242;
+    background-color: #FFFEF8;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "Hahmlet", serif;
+    font-optical-sizing: auto;
+}
+
+#hdmsinputMP #hdmsboxMP>input::placeholder {
+    color: #999;
+}
+
+#hdmsinputMP #hdmsboxMP {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#hdmsinputMP #hdmsboxMP>svg {
+    width: 32px;
+    color: #6C5242;
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+#hdmsinputMP>span {
+    color: #6C5242;
+}

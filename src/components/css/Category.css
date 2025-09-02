@@ -1,0 +1,85 @@
+#hdmcateallMP {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    background-color: #FFFEF8;
+    display: none;
+    z-index: 100;
+    transition: none;
+}
+
+#hdmcateallMP.show {
+    display: block;
+}
+
+#cateallboxMP {
+    width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    padding-left: 140px;
+    flex-direction: column;
+}
+
+.mmaintextMP {
+    width: 1000px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 120px;
+    margin-bottom: 5px;
+}
+
+.mmaintextMP>span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6C5242;
+    cursor: pointer;
+}
+
+.msubtextMP {
+    display: flex;
+}
+
+.msubtextMP>ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #6C5242;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.msubtextMP>ul>li {
+    cursor: pointer;
+}
+
+.msubtextMP>ul>li:hover {
+    text-decoration: underline;
+}
+
+.cateplantMP {
+    margin-right: 89px;
+}
+
+.cateflowerMP {
+    margin-right: 30px;
+}
+
+.catepotMP {
+    margin-right: 98px;
+}
+
+.catewreathMP {
+    margin-right: 94px;
+}
+
+.catestuffMP {
+    margin-right: 109px;
+}
+
+#hdmcateallMP.show {
+    display: block;
+}
