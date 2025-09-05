@@ -1,29 +1,56 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./css/Banner.css";
+import { useNavigate } from "react-router-dom";
 
-const banners = ["./img/banner1.png", "./img/banner2.jpg", "./img/banner3.jpg"];
+const bannerImages = [
+  "./img/banner1.png",
+  "./img/banner2.png",
+  "./img/banner3.png",
+];
 
 const Banner = () => {
   const [current, setCurrent] = useState(0);
+  const navigate = useNavigate();
 
+  const goCategoryDetail = () => {
+    navigate("/CategoryDetail");
+  };
+
+  // ✅ 전체 배너 개수 = 이미지 개수만
+  const totalBanners = bannerImages.length;
+
+  // ✅ 자동 슬라이드
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % banners.length);
-    }, 6000); // 6초마다 배너 변경
-
-    return () => clearInterval(interval); // 언마운트 시 정리
-  }, []);
+      setCurrent((prev) => (prev + 1) % totalBanners);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [totalBanners]);
 
   return (
-    <div id="bannerMP">
-      {banners.map((src, index) => (
+    <div id="bannerMP" onClick={goCategoryDetail}>
+      {bannerImages.map((src, index) => (
         <img
           key={index}
           src={src}
           alt={`banner${index + 1}`}
-          className={index === current ? "active" : ""}
+          className={current === index ? "active" : ""}
         />
       ))}
+
+      {/* ✅ 배너 네비게이션 버튼 */}
+      <div id="bannerbtnbox">
+        {[...Array(totalBanners)].map((_, index) => (
+          <button
+            key={index}
+            className={index === current ? "progress active" : "progress"}
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrent(index);
+            }}
+          ></button>
+        ))}
+      </div>
     </div>
   );
 };

@@ -27,10 +27,11 @@
 #s1MP #s1conMP .s1item7MP,
 #s1MP #s1conMP .s1item8MP {
     width: 329px;
-    height: 270px;
+    height: 280px;
     display: flex;
     flex-direction: column;
     position: relative;
+    cursor: pointer;
 }
 
 .s1itemImg1MP {
@@ -220,11 +221,19 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin-top: 10px;
 }
 
-.itemTitleMP,
-.itemPriceMP {
+.itemTitleMP {
     font-size: 20px;
+    color: #6C5242;
+    font-weight: 500;
+}
+
+.itemPriceMP {
+    font-size: 18px;
+    color: #6C5242;
+    font-weight: 400;
 }
 
 .s1item1MP .s1itemIconMP,
@@ -238,16 +247,11 @@
     position: absolute;
     bottom: 44px;
     right: 7px;
-    z-index: 10;
     width: 70px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+    height: 32px;
+    cursor: pointer;
     opacity: 0;
     transition: all 0.5s ease;
-    cursor: pointer;
 }
 
 .s1item1MP:hover .s1itemIconMP,
@@ -307,11 +311,11 @@
 }
 
 /* 아이템 2 */
-.s1item2MP:hover~.s1line2MP {
+.s1atag:hover~.s1line2MP {
     animation: linePop 0.5s ease forwards;
 }
 
-.s1item2MP:hover~.s1garoLineMP .s1grline2MP {
+.s1atag:hover~.s1garoLineMP .s1grline2MP {
     transform: scaleX(0);
     animation: garoLine 0.5s forwards;
 }
@@ -372,4 +376,42 @@
     100% {
         transform: scaleY(1);
     }
+}
+
+.heart,
+.heart2 {
+    position: absolute;
+    /* 서로 겹치도록 */
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.heart2 {
+    display: none;
+}
+
+.incart {
+    position: absolute;
+    /* 하트와 상관없이 오른쪽에 고정 */
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+}
+
+.s1itemIconMP svg,
+.s2itemIconMP svg,
+.s3itemIconMP svg,
+.s4itemIconMP svg,
+.s5itemIconMP svg,
+.s6itemIconMP svg,
+.s7itemIconMP svg,
+.s8itemIconMP svg {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    /* 아이콘이 줄어들지 않도록 고정 */
 }

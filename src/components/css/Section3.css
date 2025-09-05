@@ -1,6 +1,6 @@
 #s3MP {
     width: 100%;
-    height: 780px;
+    height: 680px;
     margin-bottom: 80px;
 }
 
@@ -12,21 +12,21 @@
 }
 
 #s3tabboxMP {
-    width: 250px;
+    width: 350px;
     height: 30px;
-    margin: 0 auto 30px auto;
+    margin: 20px auto 40px auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 #s3tabboxMP>button {
-    width: 30%;
-    height: 30px;
+    width: 28%;
+    height: 35px;
     border: 1px solid #6C5242;
     background-color: transparent;
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
     color: #6C5242;
     font-family: "Hahmlet", serif;
@@ -37,7 +37,7 @@
 
 #s3MP #s3conMP {
     width: 1440px;
-    height: 600px;
+    height: 500px;
     margin: 0 auto;
     display: flex;
 }
@@ -61,20 +61,84 @@
 #s3MP #s3conMP .s3item3MP,
 #s3MP #s3conMP .s3item4MP {
     width: 329px;
-    height: 600px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     position: relative;
+    cursor: pointer;
 }
 
 .s3itemImgMP {
     width: 327px;
-    height: 530px;
+    height: 430px;
 }
 
 .s3itemImgMP>img {
+    position: absolute;
     width: 327px;
-    height: 530px;
+    height: 430px;
+}
+
+.s3img1,
+.s3img2,
+.s3img3,
+.s3img4,
+.s3img5,
+.s3img6,
+.s3img7,
+.s3img8,
+.s3img9,
+.s3img10,
+.s3img11,
+.s3img12 {
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.s3img1-2,
+.s3img2-2,
+.s3img3-2,
+.s3img4-2,
+.s3img5-2,
+.s3img6-2,
+.s3img7-2,
+.s3img8-2,
+.s3img9-2,
+.s3img10-2,
+.s3img11-2,
+.s3img12-2 {
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.s3item1MP:hover .s3img1,
+.s3item2MP:hover .s3img2,
+.s3item3MP:hover .s3img3,
+.s3item4MP:hover .s3img4,
+.s3item1MP:hover .s3img5,
+.s3item2MP:hover .s3img6,
+.s3item3MP:hover .s3img7,
+.s3item4MP:hover .s3img8,
+.s3item1MP:hover .s3img9,
+.s3item2MP:hover .s3img10,
+.s3item3MP:hover .s3img11,
+.s3item4MP:hover .s3img12 {
+    opacity: 0;
+}
+
+.s3item1MP:hover .s3img1-2,
+.s3item2MP:hover .s3img2-2,
+.s3item3MP:hover .s3img3-2,
+.s3item4MP:hover .s3img4-2,
+.s3item1MP:hover .s3img5-2,
+.s3item2MP:hover .s3img6-2,
+.s3item3MP:hover .s3img7-2,
+.s3item4MP:hover .s3img8-2,
+.s3item1MP:hover .s3img9-2,
+.s3item2MP:hover .s3img10-2,
+.s3item3MP:hover .s3img11-2,
+.s3item4MP:hover .s3img12-2 {
+    opacity: 1;
 }
 
 .s3itemTextMP {
@@ -83,6 +147,19 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin-top: 90px;
+}
+
+.s3itemTitleMP {
+    font-size: 20px;
+    color: #6C5242;
+    font-weight: 500;
+}
+
+.s3itemPriceMP {
+    font-size: 18px;
+    color: #6C5242;
+    font-weight: 400;
 }
 
 .s3item1MP .s3itemIconMP,
@@ -94,14 +171,10 @@
     right: 7px;
     z-index: 10;
     width: 70px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    gap: 5px;
-    transition: all 0.5s ease;
+    height: 32px;
     cursor: pointer;
+    opacity: 0;
+    transition: all 0.5s ease;
 }
 
 .s3item1MP:hover .s3itemIconMP,
@@ -114,7 +187,7 @@
 
 .s3line1MP {
     width: 1px;
-    height: 600px;
+    height: 500px;
     margin: 0 20px;
     background-color: #6C5242;
 }
@@ -122,4 +195,35 @@
 #s3tabboxMP>button.active {
     background-color: #6C5242;
     color: #FFFEF8;
+}
+
+.heart,
+.heart2 {
+    position: absolute;
+    /* 서로 겹치도록 */
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.heart2 {
+    display: none;
+}
+
+.incart {
+    position: absolute;
+    /* 하트와 상관없이 오른쪽에 고정 */
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+}
+
+.s3itemIconMP svg {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    /* 아이콘이 줄어들지 않도록 고정 */
 }

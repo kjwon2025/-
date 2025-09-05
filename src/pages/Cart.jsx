@@ -1,179 +1,224 @@
-import React, { useMemo, useState } from "react";
-
+import React, { useMemo, useContext, useState } from "react";
+import { CartContext } from "../CartContext.js";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/Cart.css";
-import { Link } from "react-router-dom";
 
-// 간단한 금액 포맷터
 const formatKRW = (n) => n.toLocaleString("ko-KR");
 
-// 데모용 초기 데이터 (원하는 데이터로 주입 가능)
-const initialItems = [
-  {
-    id: 1,
-    name: "상품명 A",
-    price: 12000,
-    optionLabel: "옵션 A",
-    optionPrice: 3000,
-    qty: 1,
-    img: "./img/cartimg1.png",
-  },
-  {
-    id: 2,
-    name: "상품명 B",
-    price: 18000,
-    optionLabel: "옵션 B",
-    optionPrice: 2000,
-    qty: 1,
-    img: "./img/cartimg2.png",
-  },
-];
-
 export default function CartPage() {
-  const [items, setItems] = useState(initialItems);
-
+  const { items, setItems } = useContext(CartContext);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const navigate = useNavigate();
   const total = useMemo(
     () =>
-      items.reduce((acc, it) => acc + (it.price + it.optionPrice) * it.qty, 0),
-    [items]
+      items.reduce(
+        (acc, it) =>
+          selectedItems.includes(it.id)
+            ? acc + it.price * it.qty + it.optionPrice * (it.optionQty || 0)
+            : acc,
+        0
+      ),
+    [items, selectedItems]
   );
 
   const changeQty = (id, delta) => {
     setItems((prev) =>
-      prev
-        .map((it) =>
-          it.id === id ? { ...it, qty: Math.max(1, it.qty + delta) } : it
-        )
-        .filter(Boolean)
+      prev.map((it) =>
+        it.id === id ? { ...it, qty: Math.max(1, it.qty + delta) } : it
+      )
     );
   };
 
-  const goBrowse = () => {
-    // TODO: 상품 목록 페이지로 이동 로직 연결 (예: 라우팅)
-    alert("상품 목록 페이지로 이동");
+  const toggleSelect = (id) => {
+    setSelectedItems((prev) =>
+      prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
+    );
   };
 
-  // 장바구니 비었을 때
+  const removeSelected = () => {
+    setItems((prev) => prev.filter((it) => !selectedItems.includes(it.id)));
+    setSelectedItems([]);
+  };
+
+  // 장바구니가 비었을 때
   if (!items || items.length === 0) {
     return (
-      <>
-        <div id="s1noneCT">
-          <div id="noneboxCT">
-            <h1 className="noneh1CT">장바구니</h1>
-            <div className="nonecontentCT">
-              <span className="nonespanCT">담겨진 상품이 없습니다.</span>
-              <div className="noneitembtnCT" role="button" onClick={goBrowse}>
-                상품 구경하기
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <div id="s1CT">
-        <div id="s1boxCT">
-          <h1 className="h1CT">장바구니</h1>
-          <div className="s1contentCT">
-            <div className="ctc1CT">
-              {items.map((it, idx) => (
-                <div key={it.id} className={idx === 0 ? "tboxCT" : "bboxCT"}>
-                  <div className="cartimgCT">
-                    <img src={it.img} alt={`${it.name} 이미지`} />
-                  </div>
-
-                  <div className="iteminfoCT">
-                    <span className="infospanCT">
-                      {it.name}
-                      <br />
-                      {formatKRW(it.price)}원
-                    </span>
-
-                    <div className="pnmboxCT" aria-label="수량 조절">
-                      {/* 감소 */}
-                      <button
-                        type="button"
-                        className="pnm-btn minus"
-                        onClick={() => changeQty(it.id, -1)}
-                        aria-label="수량 감소"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          height="24"
-                        >
-                          <path
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M5 12h14"
-                          />
-                        </svg>
-                      </button>
-
-                      <span className="pnmcountCT" aria-live="polite">
-                        {it.qty}
-                      </span>
-
-                      {/* 증가 */}
-                      <button
-                        type="button"
-                        className="pnm-btn plus"
-                        onClick={() => changeQty(it.id, +1)}
-                        aria-label="수량 증가"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width="24"
-                          height="24"
-                        >
-                          <path
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 5v14m-7-7h14"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="optCT">
-                    <span className="optinfoCT">
-                      {it.optionLabel}
-                      <br />
-                      {formatKRW(it.optionPrice)}원
-                    </span>
-                  </div>
-
-                  <div className="itemoptpCT">
-                    <span className="iopinfoCT">
-                      {formatKRW(it.price + it.optionPrice)}원
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="ctc2CT">
-              <div className="resultCT">합계 {formatKRW(total)}원</div>
-              <Link to="/MessageCard">
-                <div className="buybtnCT" role="button">
-                  결제하기
-                </div>
-              </Link>
+      <div id="s1noneCT">
+        <div id="noneboxCT">
+          <h1 className="noneh1CT">장바구니</h1>
+          <div className="nonecontentCT">
+            <span className="nonespanCT">담겨진 상품이 없습니다.</span>
+            <div
+              className="noneitembtnCT"
+              role="button"
+              onClick={() => navigate("/CategoryDetail")}
+            >
+              상품 구경하기
             </div>
           </div>
         </div>
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div id="s1CT">
+      <div id="s1boxCT">
+        <h1 className="h1CT">장바구니</h1>
+        <div className="cartitemCT">
+          <div className="s1contentCT">
+            <div className="ctc1CT">
+              {items.map((it, idx) => (
+                <div key={it.id}>
+                  <div className="checkconCT">
+                    <input
+                      type="checkbox"
+                      checked={selectedItems.includes(it.id)}
+                      onChange={() => toggleSelect(it.id)}
+                      id={`chch-${it.id}`} // id 중복 방지
+                    />
+                    <label htmlFor={`chch-${it.id}`}>상품 선택</label>
+                  </div>
+                  <div
+                    className={idx === 0 ? "tboxCT" : "bboxCT"}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    {/* 이미지 */}
+                    <div className="cartimgCT">
+                      <img src={it.img} alt={`${it.name} 이미지`} />
+                    </div>
+
+                    {/* 상품 정보 */}
+                    <div className="iteminfoCT">
+                      <span className="infospanCT">
+                        {it.name}
+                        <br />
+                        {formatKRW(it.price)}원
+                      </span>
+                      <div className="pnmboxCT" aria-label="수량 조절">
+                        <button
+                          type="button"
+                          className="pnm-btn minus"
+                          onClick={() => changeQty(it.id, -1)}
+                        >
+                          -
+                        </button>
+                        <span className="pnmcountCT">{it.qty}</span>
+                        <button
+                          type="button"
+                          className="pnm-btn plus"
+                          onClick={() => changeQty(it.id, +1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* 옵션 */}
+                    <div className="optCT">
+                      <span className="optinfoCT">
+                        {it.optionLabel}
+                        <br />
+                        {formatKRW(it.optionPrice)}원
+                      </span>
+                      <div className="pnmboxCT" aria-label="옵션 수량 조절">
+                        <button
+                          type="button"
+                          className="pnm-btn minus"
+                          onClick={() =>
+                            setItems((prev) =>
+                              prev.map((item) =>
+                                item.id === it.id
+                                  ? {
+                                      ...item,
+                                      optionQty: Math.max(
+                                        0,
+                                        (item.optionQty || 1) - 1
+                                      ),
+                                    }
+                                  : item
+                              )
+                            )
+                          }
+                        >
+                          -
+                        </button>
+                        <span className="pnmcountCT">{it.optionQty || 1}</span>
+                        <button
+                          type="button"
+                          className="pnm-btn plus"
+                          onClick={() =>
+                            setItems((prev) =>
+                              prev.map((item) =>
+                                item.id === it.id
+                                  ? {
+                                      ...item,
+                                      optionQty: (item.optionQty || 1) + 1,
+                                    }
+                                  : item
+                              )
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* 가격 */}
+                    <div className="itemoptpCT">
+                      <span className="iopinfoCT">
+                        {formatKRW(
+                          it.price * it.qty +
+                            it.optionPrice * (it.optionQty || 0)
+                        )}
+                        원
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 합계 */}
+        <div className="ctc2CT">
+          <span className="totalpriceCT">합계 {formatKRW(total)}원</span>
+        </div>
+
+        {/* 버튼 */}
+        <div className="btnsCT">
+          <button
+            className="removebtnCT"
+            type="button"
+            onClick={removeSelected}
+            disabled={selectedItems.length === 0}
+          >
+            선택상품 삭제하기
+          </button>
+
+          <button
+            className="buybtnCT"
+            type="button"
+            onClick={() => {
+              if (selectedItems.length === 0) {
+                alert("상품을 선택해주세요.");
+              } else {
+                navigate("/MessageCard", {
+                  state: {
+                    cartItems: items.filter((it) =>
+                      selectedItems.includes(it.id)
+                    ),
+                  },
+                });
+              }
+            }}
+          >
+            선택상품 결제하기
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

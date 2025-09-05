@@ -18,4 +18,30 @@ body {
 
 a {
   text-decoration: none;
+  color: #6C5242;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+input {
+  font-family: "Hahmlet", serif;
+  font-optical-sizing: auto;
+  background-color: transparent;
+}
+
+input::placeholder {
+  color: #bbb;
+}
+
+input:focus {
+  color: #6C5242;
+  background-color: #fff;
 }

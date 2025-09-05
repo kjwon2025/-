@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import "./css/Mypage.css";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/SocialLog_data";
 
 const MyPage = () => {
   const ORDERS_ID = "panel-orders";
@@ -27,6 +28,30 @@ const MyPage = () => {
       if (activePanel === COUPONS_ID) setActivePanel(ORDERS_ID);
     }
   };
+  // 로컬 로그인
+  const [localUser, setLocalUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) {
+      setLocalUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  // 소셜 로그인
+  const { user: socialUser } = useContext(AuthContext);
+
+  // 최종적으로 쓸 사용자 (소셜 > 로컬)
+  const currentUser = socialUser || localUser;
+
+  const { logout: socialLogout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedInUser"); // 로컬
+    socialLogout(); // 소셜
+    alert("로그아웃 되었습니다.");
+    window.location.href = "/";
+  };
 
   return (
     <div id="mypage">
@@ -38,7 +63,9 @@ const MyPage = () => {
       {/* 인사말 & 회원 카드 */}
       <div className="my_introduce">
         <div className="my_name">
-          <p className="my_hello">안녕하세요 oo님 </p>
+          <p className="my_hello">
+            안녕하세요, {currentUser ? currentUser.name : "회원"}님
+          </p>
           <div className="my_alarm">
             기념일을 저장하시면 5%할인 쿠폰과
             <br />
@@ -235,9 +262,9 @@ const MyPage = () => {
             </Link>
           </div>
 
-          <Link to={"/"} className="my_logout">
+          <button className="my_logout" onClick={handleLogout}>
             로그아웃
-          </Link>
+          </button>
         </div>
 
         {/* 우측 패널 */}

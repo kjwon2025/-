@@ -4,7 +4,8 @@
 }
 
 #memberMB #h1MB {
-    font-size: 50px;
+    font-size: 40px;
+    font-weight: 600;
     text-align: center;
     margin: 55px 0 20px 0;
     color: #6C5242;
@@ -139,4 +140,46 @@
 .formMB .sbmMB>button {
     background-color: transparent;
     font-size: 20px;
+}
+
+.chballMB>input[type="checkbox"],
+.chbsub1MB>input[type="checkbox"],
+.chbsub2MB>input[type="checkbox"],
+.chbsub3MB>input[type="checkbox"],
+.chbsub4MB>input[type="checkbox"],
+.chbsub5MB>input[type="checkbox"],
+.chbsub6MB>input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    top: 2px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #FFE9E9;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.chballMB>input[type="checkbox"]:checked,
+.chbsub1MB>input[type="checkbox"]:checked,
+.chbsub2MB>input[type="checkbox"]:checked,
+.chbsub3MB>input[type="checkbox"]:checked,
+.chbsub4MB>input[type="checkbox"]:checked,
+.chbsub5MB>input[type="checkbox"]:checked,
+.chbsub6MB>input[type="checkbox"]:checked {
+    background-color: #FFE9E9;
+}
+
+.chballMB>input[type="checkbox"]:checked::after,
+.chbsub1MB>input[type="checkbox"]:checked::after,
+.chbsub2MB>input[type="checkbox"]:checked::after,
+.chbsub3MB>input[type="checkbox"]:checked::after,
+.chbsub4MB>input[type="checkbox"]:checked::after,
+.chbsub5MB>input[type="checkbox"]:checked::after,
+.chbsub6MB>input[type="checkbox"]:checked::after {
+    content: "✔";
+    color: #6C5242;
 }

@@ -1,0 +1,68 @@
+/* SocialLog.css - 소셜 로그인 UI 전용 */
+.lgsnsbox {
+    width: 315px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    position: absolute;
+    top: 402px;
+}
+
+.lgnaverbox,
+.lggooglebox,
+.lgkakaobox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.lgnaverbox>img,
+.lgkakaobox>img {
+    width: 75px;
+    height: 75px;
+}
+
+.lgnaverbox>span,
+.lggooglebox>span,
+.lgkakaobox>span {
+    font-size: 18px;
+    color: #6C5242;
+    font-weight: 500;
+}
+
+/* 기존 CSS 유지 + 버튼 대신 div에 적용 */
+.social-btn {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.lggooglecircle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* 이미지도 동그라미로 */
+    cursor: pointer;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.lggooglecircle:hover {
+    transform: scale(1.1);
+}
+
+.lggooglecircle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: url('../../img/googlelogo.png') no-repeat center center;
+    background-size: cover;
+}

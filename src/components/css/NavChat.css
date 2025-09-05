@@ -29,7 +29,7 @@
 }
 
 #navIcon #updownBtn {
-    border: 2px solid #6C5242;
+    border: 2px solid #2E5245;
     border-radius: 50px;
     width: 50px;
     height: 98px;
@@ -43,7 +43,7 @@
 
 #navIcon #updownBtn>svg {
     width: 35px;
-    color: #6C5242;
+    color: #2E5245;
     cursor: pointer;
 }
 
@@ -86,6 +86,7 @@
     font-weight: 600;
     font-family: "Hahmlet", serif;
     font-optical-sizing: auto;
+    cursor: pointer;
 }
 
 .cbHome {
@@ -140,6 +141,9 @@
 }
 
 #chatInput {
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
     border-top: 1px solid #ddd;
     padding: 10px;
     width: 100%;

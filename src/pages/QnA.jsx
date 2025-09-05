@@ -26,7 +26,7 @@ const QnA = () => {
 
   return (
     <div id="secallQA">
-      <div className="sec1titleQA">문의하기</div>
+      <div className="sec1titleQA">QnA</div>
 
       {/* 작성자 정보 */}
       <div className="sec2QA">

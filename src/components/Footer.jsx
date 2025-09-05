@@ -25,32 +25,36 @@ export default function Footer() {
     if (open) {
       rafRef.current = requestAnimationFrame(followScroll);
 
-      const stopFollowing = () => {
-        if (rafRef.current) {
-          cancelAnimationFrame(rafRef.current);
-          rafRef.current = null;
-        }
-      };
+      // transition이 끝난 후 스크롤 취소 + 지도 초기화
+      footerEl.addEventListener(
+        "transitionend",
+        () => {
+          // 스크롤 따라가기 취소
+          if (rafRef.current) {
+            cancelAnimationFrame(rafRef.current);
+            rafRef.current = null;
+          }
 
-      footerEl.addEventListener("transitionend", stopFollowing, { once: true });
-
-      // 🔹 Footer가 열렸을 때 지도 초기화
-      if (!mapInitialized.current && mapRef.current) {
-        const KAKAO_KEY = process.env.REACT_APP_KAKAO_API_KEY;
-        const script = document.createElement("script");
-        script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_KEY}&autoload=false`;
-        script.async = true;
-        script.onload = () => {
-          window.kakao.maps.load(() => {
-            new window.kakao.maps.Map(mapRef.current, {
-              center: new window.kakao.maps.LatLng(37.3208, 126.83),
-              level: 3,
-            });
-            mapInitialized.current = true; // 지도 초기화 완료 표시
-          });
-        };
-        document.head.appendChild(script);
-      }
+          // 지도 초기화
+          if (!mapInitialized.current && mapRef.current) {
+            const KAKAO_KEY = process.env.REACT_APP_KAKAO_JS_KEY;
+            const script = document.createElement("script");
+            script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_KEY}&autoload=false`;
+            script.async = true;
+            script.onload = () => {
+              window.kakao.maps.load(() => {
+                new window.kakao.maps.Map(mapRef.current, {
+                  center: new window.kakao.maps.LatLng(37.3081, 126.851),
+                  level: 3,
+                });
+                mapInitialized.current = true;
+              });
+            };
+            document.head.appendChild(script);
+          }
+        },
+        { once: true }
+      );
     } else {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     }
@@ -125,6 +129,7 @@ export default function Footer() {
               법인명 (상호) : 핀아
               <br />
               대표자 : 김박장유리
+              <br />
               <br />
               <br />
               주소 : 경기 안산시 상록구 광덕1로 375 강우프라자 5층

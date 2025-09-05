@@ -1,35 +1,57 @@
-import products from "../data/CategoryDetailProduct";
+// CategoryDetail.jsx
 import "./css/CategoryDetail.css";
+import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCurrentItems,
+  selectTotalPages,
+  selectActivePage,
+  setPage,
+  nextPage,
+  prevPage,
+} from "../store/productsSlice";
+import { togglePriceFilter } from "../store/productsSlice";
 
-import { useState } from "react";
-// public/img 에 있는 파일을 안전하게 참조
 const img = (name) => `${process.env.PUBLIC_URL}/img/${name}`;
 
 function CategoryDetail() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // Redux에서 페이지/아이템 가져오기
+  const items = useSelector(selectCurrentItems);
+  const totalPages = useSelector(selectTotalPages);
+  const activePage = useSelector(selectActivePage);
+
+  // 아코디언 상태
   const [sections, setSections] = useState({
     price: false,
     size: false,
     level: false,
   });
-
-  // ✅ 현재 선택된 페이지 번호 상태
-  const [activePage, setActivePage] = useState(1);
-
-  // ✅ 그룹 단위 (5개씩 페이지 버튼 표시)
-  const [pageGroup, setPageGroup] = useState(0);
-  const pagesPerGroup = 5;
-  const totalPages = 30; // 👉 상품 개수에 따라 계산 가능
-
-  const startPage = pageGroup * pagesPerGroup + 1;
-  const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
-
-  const pageNumbers = Array.from(
-    { length: endPage - startPage + 1 },
-    (_, i) => startPage + i
-  );
-
   const toggleSection = (key) =>
     setSections((prev) => ({ ...prev, [key]: !prev[key] }));
+
+  // 페이지 번호를 5개씩 그룹핑
+  const pagesPerGroup = 5;
+  const pageGroup = Math.floor((activePage - 1) / pagesPerGroup);
+  const startPage = pageGroup * pagesPerGroup + 1;
+  const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
+  const pageNumbers = useMemo(
+    () =>
+      Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i),
+    [startPage, endPage]
+  );
+
+  // 현재 페이지 아이템을 3개씩 묶어서 행 단위로 관리
+  const rowsOf3 = useMemo(() => {
+    return items.reduce((rows, product, idx) => {
+      if (idx % 3 === 0) rows.push([]);
+      rows[rows.length - 1].push(product);
+      return rows;
+    }, []);
+  }, [items]);
 
   return (
     <>
@@ -38,7 +60,6 @@ function CategoryDetail() {
         <h1>꽃 &gt; 꽃다발</h1>
       </div>
 
-      {/* 섹션 */}
       <div id="ca_section01">
         {/* 필터 영역 */}
         <div className="ca_filter">
@@ -60,18 +81,28 @@ function CategoryDetail() {
             <ul className={`caPanel ${sections.price ? "open" : ""}`}>
               <li>
                 <label>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    onChange={() => dispatch(togglePriceFilter("over5"))}
+                  />
                   5만원 이상
                 </label>
               </li>
               <li>
                 <label>
-                  <input type="checkbox" />3 ~ 5만원
+                  <input
+                    type="checkbox"
+                    onChange={() => dispatch(togglePriceFilter("3to5"))}
+                  />
+                  3 ~ 5만원
                 </label>
               </li>
               <li>
                 <label>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    onChange={() => dispatch(togglePriceFilter("under3"))}
+                  />
                   3만원 이하
                 </label>
               </li>
@@ -90,7 +121,7 @@ function CategoryDetail() {
                 className={`iconamoon--arrow-down-2-light ${
                   sections.size ? "open" : ""
                 }`}
-              ></span>
+              />
             </button>
 
             <ul className={`caPanel ${sections.size ? "open" : ""}`}>
@@ -127,7 +158,7 @@ function CategoryDetail() {
                 className={`iconamoon--arrow-down-2-light ${
                   sections.level ? "open" : ""
                 }`}
-              ></span>
+              />
             </button>
             <ul className={`caPanel ${sections.level ? "open" : ""}`}>
               <li>
@@ -151,82 +182,66 @@ function CategoryDetail() {
 
         {/* 상품 리스트 */}
         <div className="ca_products">
-          {products
-            .reduce((rows, product, idx) => {
-              if (idx % 3 === 0) rows.push([]);
-              rows[rows.length - 1].push(product);
-              return rows;
-            }, [])
-            .map((row, rowIdx) => (
-              <div
-                key={rowIdx}
-                className={`ca_products0${rowIdx + 1} ca_prostyle`}
-              >
-                {row.map((product, idx) => {
-                  const total = products.length; // 전체 상품 개수
-                  const lastRowIndex = Math.floor((total - 1) / 3); // 마지막 행 index
-                  const isLastRow = rowIdx === lastRowIndex; // 지금이 마지막 행인지?
+          {rowsOf3.map((row, rowIdx) => {
+            const isLastRow = rowIdx === rowsOf3.length - 1;
 
-                  return (
-                    <>
-                      <div className="product_card">
-                        <img src={`/img/${product.img}`} alt={product.name} />
-                        <p className="product_name">{product.name}</p>
-                        <p className="product_price">{product.price}</p>
-                        {/* 마지막 행이 아닐 때만 ca_line 보여주기 */}
-                        {!isLastRow && <div className="ca_line"></div>}
-                      </div>
+            return (
+              <div key={rowIdx} className="ca_prostyle">
+                {row.map((product, idx) => (
+                  <div key={product.id} className="product_wrap">
+                    <div
+                      className="product_card"
+                      onClick={() => {
+                        if (rowIdx === 0 && idx === 0) navigate("/detail");
+                      }}
+                      style={{
+                        cursor:
+                          rowIdx === 0 && idx === 0 ? "pointer" : "default",
+                      }}
+                    >
+                      <img src={img(product.img)} alt={product.name} />
+                      <p className="product_name">{product.name}</p>
+                      <p className="product_price">{product.price}</p>
 
-                      {/* 마지막 카드가 아닐 때만 widthLine 출력 */}
-                      {idx !== row.length - 1 && (
-                        <div className="ca_widthLine"></div>
-                      )}
-                    </>
-                  );
-                })}
+                      {/* ✅ 각 상품마다 가로선 (단, 마지막 행은 제외) */}
+                      {!isLastRow && <div className="ca_line"></div>}
+                    </div>
+
+                    {/* ✅ 세로선: 마지막 열은 제외 */}
+                    {idx !== row.length - 1 && (
+                      <div className="ca_widthLine"></div>
+                    )}
+                  </div>
+                ))}
               </div>
-            ))}
+            );
+          })}
 
-          {/* ✅ 페이지네이션 */}
+          {/* 페이지네이션 */}
           <div className="ca_page">
             <ul>
-              {/* << 처음 */}
               <li>
                 <button
                   type="button"
                   className="linklike"
-                  onClick={() => {
-                    if (pageGroup > 0) {
-                      setPageGroup(pageGroup - 1);
-                      setActivePage((pageGroup - 1) * pagesPerGroup + 1);
-                    }
-                  }}
+                  onClick={() => dispatch(setPage(1))}
+                  disabled={activePage === 1}
                 >
                   &lsaquo;&lsaquo;
                 </button>
               </li>
 
-              {/* < 이전 */}
               <li>
                 <button
                   type="button"
                   className="linklike"
-                  onClick={() => {
-                    if (activePage > 1) {
-                      const prevPage = activePage - 1;
-                      setActivePage(prevPage);
-
-                      if (prevPage < startPage) {
-                        setPageGroup(pageGroup - 1);
-                      }
-                    }
-                  }}
+                  onClick={() => dispatch(prevPage())}
+                  disabled={activePage === 1}
                 >
                   &lsaquo;
                 </button>
               </li>
 
-              {/* 숫자 */}
               {pageNumbers.map((num) => (
                 <li key={num}>
                   <button
@@ -234,44 +249,30 @@ function CategoryDetail() {
                     className={`linklike caLike ${
                       activePage === num ? "active" : ""
                     }`}
-                    onClick={() => setActivePage(num)}
+                    onClick={() => dispatch(setPage(num))}
                   >
                     {num}
                   </button>
                 </li>
               ))}
 
-              {/* > 한 칸 */}
               <li>
                 <button
                   type="button"
                   className="linklike"
-                  onClick={() => {
-                    if (activePage < totalPages) {
-                      const nextPage = activePage + 1;
-                      setActivePage(nextPage);
-                      if (nextPage > endPage) {
-                        setPageGroup(pageGroup + 1);
-                      }
-                    }
-                  }}
+                  onClick={() => dispatch(nextPage())}
+                  disabled={activePage === totalPages}
                 >
                   &rsaquo;
                 </button>
               </li>
 
-              {/* >> 그룹 단위 */}
               <li>
                 <button
                   type="button"
                   className="linklike"
-                  onClick={() => {
-                    if (endPage < totalPages) {
-                      const nextGroup = pageGroup + 1;
-                      setPageGroup(nextGroup);
-                      setActivePage(nextGroup * pagesPerGroup + 1);
-                    }
-                  }}
+                  onClick={() => dispatch(setPage(totalPages))}
+                  disabled={activePage === totalPages}
                 >
                   &rsaquo;&rsaquo;
                 </button>

@@ -1,0 +1,99 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.puclose {
+    width: 500px;
+    height: 30px;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+}
+
+.puclose>input {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    top: 4px;
+    cursor: pointer;
+}
+
+.puclose>label {
+    margin-left: 10px;
+    color: #FFFEF8;
+    cursor: pointer;
+}
+
+.puclose>button {
+    margin-left: 30px;
+    background-color: #FFFEF8;
+    border-radius: 5px;
+    width: 50px;
+    color: #6C5242;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.pucontainer {
+    background: #FFFEF8;
+    border-radius: 10px;
+    width: 500px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.pucontents {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px 10px 0 0;
+    background-color: #6C5242;
+}
+
+.pulotbtn {
+    width: 220px;
+    height: 50px;
+    background-color: #6C5242;
+    color: #FFFEF8;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.puclose>input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #FFE9E9;
+    background-color: transparent;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.puclose>input[type="checkbox"]:checked {
+    background-color: #FFE9E9;
+}
+
+.puclose>input[type="checkbox"]:checked::after {
+    content: "✔";
+    color: #6C5242;
+}

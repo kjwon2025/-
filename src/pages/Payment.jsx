@@ -142,7 +142,8 @@ export default function PaymentPage() {
 
               <div className="howbPM">
                 <h3 className="h34PM">배송 방법</h3>
-                <div className="hdivPM">오늘 배송</div>
+                <div className="hdiv1PM">오늘 배송</div>
+                <div className="hdiv2PM">일반 배송</div>
               </div>
 
               <h3 className="h35PM">쿠폰</h3>
@@ -174,14 +175,18 @@ export default function PaymentPage() {
                 <div className="pwbtnboxPM">
                   <button
                     type="button"
-                    className="pwbtn1PM"
+                    className={`pwbtn1PM ${
+                      payMethod === "card" ? "selectedPM" : ""
+                    }`}
                     onClick={() => setPayMethod("card")}
                   >
                     신용카드
                   </button>
                   <button
                     type="button"
-                    className="pwbtn2PM"
+                    className={`pwbtn2PM ${
+                      payMethod === "bank" ? "selectedPM" : ""
+                    }`}
                     onClick={() => setPayMethod("bank")}
                   >
                     무통장 입금
@@ -254,7 +259,7 @@ export default function PaymentPage() {
 
                     <span>비밀번호 앞 두자리</span>
                     <input
-                      type="number"
+                      type="password"
                       className="pwtwoPM"
                       maxLength="2"
                       value={cardInfo.pw}
@@ -265,6 +270,23 @@ export default function PaymentPage() {
                   </>
                 )}
               </div>
+
+              {payMethod === "bank" && (
+                <div className="bankInfoPM">
+                  <h4>무통장 입금 안내</h4>
+                  <p>
+                    주문 후 아래 계좌로 입금해주셔야 주문이 완료됩니다.
+                    <br />
+                    <strong>입금 계좌 :</strong> 국민은행 123-4567-8901-23
+                    (예금주: 핀아)
+                    <br />
+                    <strong>입금 기한 :</strong> 주문 후 24시간 이내
+                  </p>
+                  <p className="bankNoticePM">
+                    ⚠️ 입금자명과 주문자명이 다를 경우 고객센터로 꼭 연락주세요.
+                  </p>
+                </div>
+              )}
 
               <div className="pwagreetextPM">
                 <span>

@@ -64,7 +64,7 @@
     font-size: 20px;
 }
 
-.sec2inputQA input[type="password"] {
+.sec2inputQA>input[type="password"] {
     background-color: #FFFEF8;
 }
 
@@ -74,7 +74,7 @@
     color: #6C5242;
 }
 
-.sec2inputQA input {
+.sec2inputQA>input {
     padding: 10px;
     border: 1px solid #6C5242;
     font-size: 20px;
@@ -134,7 +134,7 @@
     gap: 5px;
 }
 
-.sec3inputQA input[type="text"],
+.sec3inputQA>input[type="text"],
 .sec3inputQA select,
 .sec3inputQA textarea {
     width: 600px;

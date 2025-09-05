@@ -9,14 +9,15 @@
 }
 
 .h1OL {
-    font-size: 50px;
+    font-size: 40px;
+    font-weight: 600;
     margin-bottom: 50px;
     color: #6C5242;
 }
 
 .s1content1OL {
     width: 1198px;
-    height: 600px;
+    height: 370px;
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #6C5242;
@@ -29,7 +30,7 @@
 
 .conbox1OL {
     width: 200px;
-    height: 500px;
+    height: 320px;
     border-right: 1px solid #6C5242;
     border-bottom: 1px solid #6C5242;
     display: flex;
@@ -42,7 +43,7 @@
 
 .conbox2OL {
     width: 997px;
-    height: 500px;
+    height: 320px;
     border-bottom: 1px solid #6C5242;
     display: flex;
     flex-direction: column;
@@ -50,7 +51,7 @@
 
 .cbb1OL {
     width: 100%;
-    height: 250px;
+    height: 160px;
     border-bottom: 1px solid #6C5242;
     display: flex;
     align-items: center;
@@ -60,7 +61,7 @@
 .itemnameOL,
 .itemdlvOL {
     width: 250px;
-    height: 250px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,13 +69,13 @@
 }
 
 .itemimgOL>img {
-    width: 190px;
-    height: 235px;
+    width: 175px;
+    height: 130px;
 }
 
 .itempriceOL {
     width: 200px;
-    height: 250px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,7 +84,7 @@
 
 .reviewboxOL {
     width: 250px;
-    height: 250px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -99,15 +100,18 @@
     font-weight: 500;
     cursor: pointer;
     box-shadow: 1px 1px 3px #bbb;
+    position: relative;
 }
 
 .rvbtnOL:hover {
     background-color: #ffdddd;
+    top: 1px;
+    left: 1px;
 }
 
 .cbb2OL {
     width: 100%;
-    height: 250px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,18 +119,18 @@
 
 .conbox3OL {
     width: 100%;
-    height: 100px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     color: #6C5242;
 }
 
 .s1content2OL {
     width: 1198px;
-    height: 350px;
+    height: 210px;
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #6C5242;
@@ -139,7 +143,7 @@
 
 .con2box1OL {
     width: 200px;
-    height: 250px;
+    height: 160px;
     border-right: 1px solid #6C5242;
     border-bottom: 1px solid #6C5242;
     display: flex;
@@ -152,7 +156,7 @@
 
 .con2box2OL {
     width: 997px;
-    height: 250px;
+    height: 160px;
     border-bottom: 1px solid #6C5242;
     display: flex;
     flex-direction: column;
@@ -160,7 +164,7 @@
 
 .c2bb1OL {
     width: 100%;
-    height: 250px;
+    height: 160px;
     border-bottom: 1px solid #6C5242;
     display: flex;
     align-items: center;
@@ -168,11 +172,11 @@
 
 .con2box3OL {
     width: 100%;
-    height: 100px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     color: #6C5242;
 }

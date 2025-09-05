@@ -1,0 +1,33 @@
+.news-item {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.news-item .thumbnail {
+    margin-right: 1rem;
+}
+
+.news-item .thumbnail img {
+    display: block;
+    width: 180px;
+    height: 130px;
+    object-fit: cover;
+}
+
+.news-item .contents h2 {
+    margin: 0;
+    color: #6C5242;
+    font-weight: 500;
+}
+
+.news-item .contents h2 a {
+    color: #6C5242;
+    text-decoration: none;
+}
+
+.news-item .contents p {
+    margin: 0;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+    color: #2b2b2b;
+}

@@ -1,9 +1,9 @@
 #headerMAIN {
-    width: 100%;
+    min-width: 1905px;
     height: 120px;
     display: flex;
     position: relative;
-    transition: opacity 0.1s ease;
+    transition: opacity 0 ease;
     z-index: 100;
 }
 
@@ -144,14 +144,14 @@
 }
 
 #header2CPN {
-    width: 100%;
+    min-width: 1905px;
     height: 60px;
     display: flex;
     position: fixed;
     top: 0;
     left: 0;
     opacity: 0;
-    transition: opacity 0.1s ease;
+    transition: opacity 0 ease;
     z-index: 101;
     pointer-events: none;
     background-color: #FFFEF8;
@@ -294,4 +294,41 @@
 
 .hdmmyicon {
     cursor: pointer;
+}
+
+.hdmms6MP a:hover {
+    text-decoration: underline;
+}
+
+
+/* 카테고리 열렸을 때 hover 무효화 (120px 헤더) */
+.cate-open .hdmmcate1MP:hover .hdmms1MP,
+.cate-open .hdmmcate2MP:hover .hdmms2MP,
+.cate-open .hdmmcate3MP:hover .hdmms3MP,
+.cate-open .hdmmcate4MP:hover .hdmms4MP,
+.cate-open .hdmmcate5MP:hover .hdmms5MP,
+.cate-open .hdmmcate6MP:hover .hdmms6MP {
+    display: none !important;
+}
+
+/* 카테고리 열렸을 때 hover 무효화 (60px 헤더) */
+.cate-open .hd2mcate1MP:hover .hd2ms1MP,
+.cate-open .hd2mcate2MP:hover .hd2ms2MP,
+.cate-open .hd2mcate3MP:hover .hd2ms3MP,
+.cate-open .hd2mcate4MP:hover .hd2ms4MP,
+.cate-open .hd2mcate5MP:hover .hd2ms5MP,
+.cate-open .hd2mcate6MP:hover .hd2ms6MP {
+    display: none !important;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    /* 투명 */
+    z-index: 90;
+    /* 헤더보다 뒤, 카테고리보다 앞 */
 }

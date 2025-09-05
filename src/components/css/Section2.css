@@ -43,17 +43,19 @@
 }
 
 #s2MP #s2con1MP .s2con2MP>.s2itemBigImgMP>img {
+    position: absolute;
     width: 689px;
     height: 575px;
 }
 
-#s2MP #s2con1MP .s2con2MP>.s2itemTextMP {
+#s2MP #s2con1MP .s2con2MP>.s2BigitemTextMP {
     width: 689px;
     height: 70px;
-    margin: 0 33px 0 auto;
+    margin: 80px 33px 0 auto;
     display: flex;
     flex-direction: column;
     text-align: center;
+    cursor: pointer;
 }
 
 .s2con2MP .s2itemIconMP {
@@ -62,14 +64,10 @@
     right: 35px;
     z-index: 10;
     width: 70px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+    height: 32px;
+    cursor: pointer;
     opacity: 0;
     transition: all 0.5s ease;
-    cursor: pointer;
 }
 
 .s2con2MP:hover .s2itemIconMP {
@@ -102,8 +100,11 @@
 }
 
 .s2itemImgMP>img {
+    position: absolute;
     width: 318px;
     height: 230px;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
 }
 
 .s2itemTextMP {
@@ -111,13 +112,21 @@
     height: 70px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     text-align: center;
+    margin-top: 240px;
+    cursor: pointer;
 }
 
-.s2itemTitleMP,
-.s2itemPriceMP {
+.s2itemTitleMP {
     font-size: 20px;
+    color: #6C5242;
+    font-weight: 500;
+}
+
+.s2itemPriceMP {
+    font-size: 18px;
+    color: #6C5242;
+    font-weight: 400;
 }
 
 .s2item1MP .s2itemIconMP,
@@ -129,14 +138,10 @@
     right: 7px;
     z-index: 10;
     width: 70px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    gap: 5px;
-    transition: all 0.5s ease;
+    height: 32px;
     cursor: pointer;
+    opacity: 0;
+    transition: all 0.5s ease;
 }
 
 .s2item1MP:hover .s2itemIconMP,
@@ -147,18 +152,20 @@
     bottom: -10px;
 }
 
-.s2line2MP {
+.s2line2MP,
+.s2line3MP {
     width: 1px;
-    height: 305px;
-    margin: 0 24px 0 25px;
     background-color: #6C5242;
 }
 
-.s2line3MP {
-    width: 1px;
+.s2line2MP {
     height: 305px;
     margin: 0 24px 0 25px;
-    background-color: #6C5242;
+}
+
+.s2line3MP {
+    height: 305px;
+    margin: 0 24px 0 25px;
 }
 
 .s2garoLineMP {
@@ -168,20 +175,21 @@
     margin: 19px 0;
 }
 
+.s2grline1MP,
+.s2grline2MP {
+    height: 1px;
+    background-color: #6C5242;
+}
+
 .s2grline1MP {
     width: 330px;
-    height: 1px;
     margin-right: 40px;
-    background-color: #6C5242;
 }
 
 .s2grline2MP {
     width: 330px;
-    height: 1px;
-    background-color: #6C5242;
 }
 
-/* 가로 선 */
 @keyframes s2garoLine {
     0% {
         transform: scaleX(0);
@@ -192,7 +200,6 @@
     }
 }
 
-/* 세로 선 */
 @keyframes s2linePop {
     0% {
         transform: scaleY(0);
@@ -201,4 +208,118 @@
     100% {
         transform: scaleY(1);
     }
+}
+
+.heart,
+.heart2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.heart2 {
+    display: none;
+}
+
+.incart {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+}
+
+.s2itemIconMP svg {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+/* 기본 이미지 상태 */
+.s2itemBigImgMP img,
+.s2itemImgMP img {
+    position: absolute;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
+}
+
+/* 첫 번째 이미지 보이기 */
+.s2itemBigImgMP .s2img1,
+.s2itemImgMP .s2img2,
+.s2itemImgMP .s2img3,
+.s2itemImgMP .s2img4,
+.s2itemImgMP .s2img5 {
+    opacity: 1;
+}
+
+/* 두 번째 이미지 숨기기 */
+.s2itemBigImgMP .s2img1-2,
+.s2itemImgMP .s2img2-2,
+.s2itemImgMP .s2img3-2,
+.s2itemImgMP .s2img4-2,
+.s2itemImgMP .s2img5-2 {
+    opacity: 0;
+}
+
+/* 큰 이미지 호버 & 텍스트 호버 */
+.s2itemBigImgMP:hover .s2img1,
+.s2itemTextMP:hover~.s2itemBigImgMP .s2img1 {
+    opacity: 0;
+}
+
+.s2itemBigImgMP:hover .s2img1-2,
+.s2itemTextMP:hover~.s2itemBigImgMP .s2img1-2 {
+    opacity: 1;
+}
+
+/* 작은 이미지 호버 & 텍스트 호버 */
+.s2item1MP:hover .s2img2,
+.s2item1MP .s2itemTextMP:hover~.s2itemImgMP .s2img2 {
+    opacity: 0;
+}
+
+.s2item1MP:hover .s2img2-2,
+.s2item1MP .s2itemTextMP:hover~.s2itemImgMP .s2img2-2 {
+    opacity: 1;
+}
+
+.s2item2MP:hover .s2img3,
+.s2item2MP .s2itemTextMP:hover~.s2itemImgMP .s2img3 {
+    opacity: 0;
+}
+
+.s2item2MP:hover .s2img3-2,
+.s2item2MP .s2itemTextMP:hover~.s2itemImgMP .s2img3-2 {
+    opacity: 1;
+}
+
+.s2item3MP:hover .s2img4,
+.s2item3MP .s2itemTextMP:hover~.s2itemImgMP .s2img4 {
+    opacity: 0;
+}
+
+.s2item3MP:hover .s2img4-2,
+.s2item3MP .s2itemTextMP:hover~.s2itemImgMP .s2img4-2 {
+    opacity: 1;
+}
+
+.s2item4MP:hover .s2img5,
+.s2item4MP .s2itemTextMP:hover~.s2itemImgMP .s2img5 {
+    opacity: 0;
+}
+
+.s2item4MP:hover .s2img5-2,
+.s2item4MP .s2itemTextMP:hover~.s2itemImgMP .s2img5-2 {
+    opacity: 1;
+}
+
+.s2con2MP:hover .s2img1 {
+    opacity: 0;
+}
+
+.s2con2MP:hover .s2img1-2 {
+    opacity: 1;
 }

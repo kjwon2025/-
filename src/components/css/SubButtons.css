@@ -31,16 +31,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#subMP #sbtnMP .sbtnboxMP .boxbgMP>img {
-    width: 50px;
-    height: 50px;
+    box-shadow: 1px 1px 3px #bbb;
+    position: relative;
+    transition: all 0.1s linear;
 }
 
 #subMP #sbtnMP .sbtnboxMP .boxbgMP:hover {
-    background-color: #ffdddd;
-    box-shadow: 1px 1px 5px #bbb;
+    background-color: #ffd2d2;
+    border: none;
+    top: 2px;
+    left: 2px;
 }
 
 #subMP #sbtnMP .sbtnboxMP>span {

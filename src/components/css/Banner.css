@@ -4,6 +4,7 @@
     height: 670px;
     background-color: #FFFEF8;
     overflow: hidden;
+    cursor: pointer;
 }
 
 #bannerMP>img {
@@ -18,4 +19,63 @@
 
 #bannerMP>img.active {
     opacity: 1;
+}
+
+#bannerbtnbox {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    gap: 10px;
+}
+
+/* 기본 버튼: 동그라미 */
+#bannerbtnbox>.progress {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #bbb;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    /* 길이 전환 부드럽게 */
+}
+
+/* 현재 활성화된 버튼: 길어짐 */
+#bannerbtnbox>.progress.active {
+    width: 50px;
+    border-radius: 6px;
+    /* 둥근 직사각형 */
+    background-color: #bbb;
+}
+
+/* 진행 바 */
+#bannerbtnbox>.progress::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* 활성화된 버튼에서만 진행 애니메이션 */
+#bannerbtnbox>.progress.active::before {
+    animation: fillBar 4.2s linear forwards;
+}
+
+/* 애니메이션 정의 */
+@keyframes fillBar {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
 }

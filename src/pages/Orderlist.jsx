@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./css/Orderlist.css";
 
@@ -41,6 +42,8 @@ const initialOrders = [
 
 export default function OrderList() {
   const [orders] = useState(initialOrders);
+
+  const navigate = useNavigate();
 
   const goBrowse = () => {
     alert("상품 구경하기 페이지로 이동");
@@ -98,7 +101,9 @@ export default function OrderList() {
                         <button
                           className="rvbtnOL"
                           type="button"
-                          onClick={() => alert(`${it.name} 리뷰 쓰기`)}
+                          onClick={() =>
+                            navigate("/detail", { state: { openReview: true } })
+                          }
                         >
                           리뷰 쓰기
                         </button>

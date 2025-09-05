@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../CartContext.js";
 import "./css/Detail.css";
 
 const reviewsData = [
   {
     author: "yeojin",
+    rating: 4, // ⭐️ 4점
     content:
       "꽃이 너무 예뻐요~ <br>두 송이만 구매했지만 방을 밝혀주는 효과가 있네요!",
     date: "2025.08.12",
@@ -12,24 +14,28 @@ const reviewsData = [
   },
   {
     author: "yuri",
+    rating: 5,
     content: "몬스테라가 아주 화려하네요.<br>대형으로 키워보겠습니다! 정글!",
     date: "2025.08.11",
     img: "./img/rv_review2.png",
   },
   {
     author: "jiwon",
+    rating: 5,
     content: "미니미한 화분이 너무 귀여워요.",
     date: "2025.08.10",
     img: "./img/rv_review3.png",
   },
   {
     author: "coco",
+    rating: 3,
     content: "냥냥냥냥",
     date: "2025.08.09",
     img: "./img/rv_review4.png",
   },
   {
     author: "coco_dog",
+    rating: 5,
     content: "멍멍멍멍",
     date: "2025.08.09",
     img: "./img/rv_review5.png",
@@ -41,8 +47,45 @@ const reviewsPerPage = 5;
 const Detail = () => {
   const navigate = useNavigate();
 
-  const goCart = () => navigate("/Cart");
-  const goMessageCard = () => navigate("/MessageCard");
+  const { addItem } = useContext(CartContext);
+
+  const goCart = () => {
+    addItem({
+      id: 1,
+      name: "메리골드 위시",
+      price: 59900,
+      optionLabel: "크리스탈 화병",
+      optionPrice: 12000,
+      optionQty: optionCount,
+      qty: mainCount,
+      img: mainImg,
+    });
+
+    navigate("/Cart");
+  };
+  const goMessageCard = () => {
+    const cartItems = [
+      {
+        id: 1,
+        name: "메리골드 위시",
+        price: 59900,
+        qty: mainCount,
+        optionLabel: "크리스탈 화병",
+        optionPrice: 12000,
+        optionQty: optionCount,
+        deliveryType,
+        img: mainImg,
+      },
+    ];
+
+    navigate("/MessageCard", {
+      state: { cartItems },
+    });
+
+    window.scrollTo(0, 0);
+  };
+
+  const [newRating, setNewRating] = useState(0); // 리뷰 입력 시 선택한 별점
 
   // ---------- 리뷰 모달 상태 ----------
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +96,6 @@ const Detail = () => {
   const totalPages = Math.ceil(reviews.length / reviewsPerPage);
   const startIndex = (currentPage - 1) * reviewsPerPage;
   const currentReviews = reviews.slice(startIndex, startIndex + reviewsPerPage);
-
   const handleAddReview = () => {
     if (!newReview.trim()) {
       alert("리뷰 내용을 입력해주세요.");
@@ -67,6 +109,7 @@ const Detail = () => {
 
     const newItem = {
       author: "yuri",
+      rating: newRating, // ⭐ 여기에 선택한 별점 추가
       content: newReview,
       date: dateStr,
       img: attachedFile
@@ -76,6 +119,7 @@ const Detail = () => {
 
     setReviews([newItem, ...reviews]);
     setNewReview("");
+    setNewRating(0); // 리뷰 등록 후 별점 초기화
     setAttachedFile(null);
     setCurrentPage(1);
   };
@@ -96,29 +140,49 @@ const Detail = () => {
     setAttachedFile(file);
   };
 
+  // ---------- 상품 수량 상태 ----------
+  const [mainCount, setMainCount] = useState(1); // 메리골드 위시
+  const [optionCount, setOptionCount] = useState(1); // 옵션 추가 (화병)
+
+  // ---------- 배송 방법 상태 ----------
+  const [deliveryType, setDeliveryType] = useState("today"); // 디폴트: 오늘배송
+
+  // 메인 이미지
+  const [mainImg, setMainImg] = useState("/img/dt_flower1.png");
+
+  // 썸네일 이미지 목록
+  const [subImgs, setSubImgs] = useState([
+    "/img/dt_flower2.jpg",
+    "/img/dt_flower3.jpg",
+    "/img/dt_flower4.png",
+    "/img/dt_flower5.png",
+  ]);
+
+  // 클릭하면 메인/썸네일 자리 바꾸는 함수
+  const handleSwap = (clickedImg, idx) => {
+    const newSubImgs = [...subImgs];
+    newSubImgs[idx] = mainImg; // 기존 메인 이미지 → 클릭한 썸네일 자리
+    setSubImgs(newSubImgs);
+    setMainImg(clickedImg); // 메인 이미지 → 클릭한 썸네일
+  };
+
   return (
-    <div>
+    <div id="detailfullDT">
       <div id="section1DT">
         <div className="flowerpicDT">
           <div className="flowerpic1DT">
-            <img src="./img/dt_flower1.png" alt="dt_flower1" />
+            <img src={mainImg} alt="dt_flower1" />
           </div>
           <div className="flowerpicsubDT">
-            <div className="sub1DT">
-              <img src="./img/dt_flower2.jpg" alt="dt_flower2" />
-            </div>
-            <div className="sub2DT">
-              {" "}
-              <img src="/img/dt_flower3.jpg" alt="dt_flower3" />
-            </div>
-            <div className="sub3DT">
-              {" "}
-              <img src="/img/dt_flower4.png" alt="dt_flower4" />
-            </div>
-            <div className="sub4DT">
-              {" "}
-              <img src="/img/dt_flower5.png" alt="dt_flower5" />
-            </div>
+            {subImgs.map((img, idx) => (
+              <div key={idx} className={`sub${idx + 1}DT`}>
+                <img
+                  src={img}
+                  alt={`dt_flower${idx + 2}`}
+                  onClick={() => handleSwap(img, idx)}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
@@ -138,8 +202,22 @@ const Detail = () => {
                 <div className="innertopDT">
                   <div className="innerleftDT">배송방법</div>
                   <div className="innerrightDT">
-                    <button className="rightBtn1DT">일반배송</button>
-                    <button className="rightBtn2DT">오늘배송</button>
+                    <button
+                      className={`rightBtn1DT ${
+                        deliveryType === "normal" ? "active" : ""
+                      }`}
+                      onClick={() => setDeliveryType("normal")}
+                    >
+                      일반배송
+                    </button>
+                    <button
+                      className={`rightBtn2DT ${
+                        deliveryType === "today" ? "active" : ""
+                      }`}
+                      onClick={() => setDeliveryType("today")}
+                    >
+                      오늘배송
+                    </button>
                   </div>
                 </div>
                 <div className="innerbottomDT">
@@ -155,9 +233,21 @@ const Detail = () => {
                   <div className="centertopleftDT">메리골드 위시</div>
                   <div className="centertoprightDT">
                     <div className="countbutton1DT">
-                      <button className="minusDT">-</button>
-                      <span className="countDT">1</span>
-                      <button className="plusDT">+</button>
+                      <button
+                        className="minusDT"
+                        onClick={() =>
+                          setMainCount((prev) => Math.max(1, prev - 1))
+                        }
+                      >
+                        -
+                      </button>
+                      <span className="countDT">{mainCount}</span>
+                      <button
+                        className="plusDT"
+                        onClick={() => setMainCount((prev) => prev + 1)}
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -166,18 +256,31 @@ const Detail = () => {
                   <div className="centerbottomrightDT">
                     <span className="vaseDT">화병</span>&nbsp;(+12,000)
                     <div className="countbutton2DT">
-                      <button className="minusDT">-</button>
-                      <span className="countDT">1</span>
-                      <button className="plusDT">+</button>
+                      <button
+                        className="minusDT"
+                        onClick={() =>
+                          setOptionCount((prev) => Math.max(0, prev - 1))
+                        }
+                      >
+                        -
+                      </button>
+                      <span className="countDT">{optionCount}</span>
+                      <button
+                        className="plusDT"
+                        onClick={() => setOptionCount((prev) => prev + 1)}
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
             <div className="flowertotalDT">
               <div className="totalleftDT">총 주문금액</div>
-              <div className="totalrightDT">71,900원</div>
+              <div className="totalrightDT">
+                {(59_900 * mainCount + 12_000 * optionCount).toLocaleString()}원
+              </div>
             </div>
 
             <div className="flowerbuttonDT">
@@ -227,10 +330,10 @@ const Detail = () => {
 
         <div className="detail2DT">
           <div className="detail2innerDT">
-            <div className="detail2innerleftDT">
+            <div className="detail2innerleftDT sec2DT">
               <img src="/img/dt_detail2.png" alt="dt_detail2" />
             </div>
-            <div className="detail2innerrightDT">
+            <div className="detail2innerrightDT sec2DT">
               <div className="detail2topDT">
                 반드시 오고야 말 행복, 메리골드
               </div>
@@ -274,6 +377,117 @@ const Detail = () => {
                 <br />
                 <br />
                 *꽃 구성은 농장 상황에 따라 조금씩 변경될 수 있습니다.
+              </div>
+            </div>
+
+            <div className="detailplusWrapperDT">
+              <div className="detailplus1DT">
+                <img src="/img/dt_detail4.png" alt="dt_detail4" />
+              </div>
+              <div className="detailplus1DT">
+                <p className="pluspinaDT">P</p>IN-A{" "}
+                <p className="pluspinaDT">
+                  <br />P
+                </p>
+                REMIUM <p className="pluspinaDT">P</p>ACKAGE
+                <p className="detailplustextDT">
+                  <p className="detailplustitle2DT">
+                    <br /> <br />
+                    1. 꽃다발
+                  </p>{" "}
+                  플로리스트의 손길로 디자인해 최상의 아름다움을 담습니다.{" "}
+                  <br />
+                  <p className="detailplustitle2DT">
+                    <br />
+                    2. 포장
+                  </p>
+                  꽃다발을 더욱 돋보이게 하며 안전하게 배송되도록 포장합니다.{" "}
+                  <p className="detailplustitle2DT">
+                    <br />
+                    3. 물 주머니
+                  </p>
+                  도착하는 순간까지도 생기가 살아있도록 물처리 후 배송드립니다.
+                  <p className="detailplustitle2DT">
+                    {" "}
+                    <br />
+                    4. 핀아 프리미엄 선물 박스
+                  </p>
+                  꽃 선물의 기대감과 만족도를 높이는 선물 패키지를 담아냅니다.
+                </p>
+              </div>
+            </div>
+            <div className="detailplus2DT">
+              <div className="detailplus2-topDT">
+                <img src="/img/logo.png" alt="logo.png" />
+              </div>
+              <div className="detailplus2-bottomDT">
+                <p className="detailplus2title">
+                  핀아만의 프리미엄 패키지로 소중한 마음을 전하세요
+                </p>{" "}
+                <br />
+                핀아의 모든 꽃다발은 시그니처 패키지에 담겨 안전하게 배송됩니다.
+                <br />
+                소중한 마음을 전할 수 있도록 핀아는 매일 고민하고 있습니다.
+              </div>
+            </div>
+
+            <div className="detailplusWrapper3DT">
+              <div className="detailplus3DT">
+                <img src="/img/dt_detail5.png" alt="dt_detail5" />
+              </div>
+              <div className="detailplus3DT">
+                <p className="detailplustext3DT">
+                  메시지를 담은 꽃다발, 당신의 진심이 됩니다.{" "}
+                </p>
+                <br /> <br />
+                꽃다발 주문 시, 메세지 카드 작성이 가능합니다. <br />
+                프리미엄 꽃다발과 맞춤 메시지, PIN-A에서 준비하세요.
+              </div>
+            </div>
+
+            <div className="detailplus4DT">
+              <div className="detailplus4-topDT">
+                <img src="/img/logo.png" alt="logo.png" />
+              </div>
+              <div className="detailplus4-bottomDT">
+                <p className="detailplus4title">핀아의 다섯가지 약속</p>
+
+                <ul className="promise-list">
+                  <li>
+                    <span className="promise-number">1</span> 매일 새벽 꽃
+                    농장과 시장에서 신선한 꽃을 수급합니다.
+                  </li>
+                  <li>
+                    <span className="promise-number">2</span> 저온 창고를 통해
+                    꽃에 맞는 환경을 조성해 보다 싱싱하게 꽃을 관리합니다.
+                  </li>
+                  <li>
+                    <span className="promise-number">3</span> 매일 새벽 당일
+                    출고되는 모든 꽃의 제작이 이루어집니다.
+                  </li>
+                  <li>
+                    <span className="promise-number">4</span> 배송 중에도 신선할
+                    수 있도록 모든 꽃에 물 처리를 합니다.
+                  </li>
+                  <li>
+                    <span className="promise-number">5</span> 포장된 꽃이 상하지
+                    않도록 고안된 핀아 프리미엄 박스에 담아 배송합니다.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="detailplus5DT">
+              <div className="topBoxDT">
+                <img src="/img/dt_detail6.png" alt="dt_detail6" />
+              </div>
+              <div className="bottomBoxDT">
+                <br />
+                핀아의 꽃다발은 싱싱함이 최우선입니다. <br />
+                <br />
+                좋은 품질의 꽃을 좋은 가격으로 구매하여 고객님의 집 앞으로
+                배송하기 위해 핀아는 매일 노력합니다. <br />
+                이런 노력들이 모여 우리 일상의 꽃 문화가 만들어지리라 믿습니다.
               </div>
             </div>
             <div className="detail3noticeDT">
@@ -351,31 +565,39 @@ const Detail = () => {
                   기타 상품 추천&nbsp;(연관 상품)
                 </div>
                 <div className="detail4middleDT">
-                  <div className="boxDT" />
-                  <div className="boxDT" />
-                  <div className="boxDT" />
-                  <div className="boxDT" />
+                  <div className="boxDT">
+                    <img src="./img/dt_etc1.png" />
+                  </div>
+
+                  <div className="boxDT">
+                    {" "}
+                    <img src="./img/dt_etc2.png" />
+                  </div>
+                  <div className="boxDT">
+                    {" "}
+                    <img src="./img/dt_etc3.png" />
+                  </div>
+                  <div className="boxDT">
+                    {" "}
+                    <img src="./img/dt_etc4.png" />
+                  </div>
                 </div>
                 <div className="detail4bottomDT">
                   <div className="cellDT">
-                    상품명
-                    <br />
-                    상품가격
+                    <div className="celltitleDT">원형 도자기 화병</div>
+                    13,900원
                   </div>
                   <div className="cellDT">
-                    상품명
-                    <br />
-                    상품가격
+                    <div className="celltitleDT"> 백합(한 송이)</div>
+                    4,900원
                   </div>
                   <div className="cellDT">
-                    상품명
-                    <br />
-                    상품가격
+                    <div className="celltitleDT"> 베르가못 향초</div>
+                    12,000원
                   </div>
                   <div className="cellDT">
-                    상품명
-                    <br />
-                    상품가격
+                    <div className="celltitleDT"> 초록잎사귀 화병</div>
+                    15,900원
                   </div>
                 </div>
               </div>
@@ -410,6 +632,21 @@ const Detail = () => {
                     <img src={review.img} alt="review image" />
                     <div className="review-textRV">
                       <p className="review-authorRV">{review.author}</p>
+
+                      {/* 별점 표시 */}
+                      <p className="review-ratingRV">
+                        {Array.from({ length: 5 }, (_, i) => (
+                          <span
+                            key={i}
+                            className={
+                              i < review.rating ? "star filled" : "star"
+                            }
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </p>
+
                       <p
                         className="review-contentRV"
                         dangerouslySetInnerHTML={{ __html: review.content }}
@@ -433,7 +670,8 @@ const Detail = () => {
               </div>
 
               <div className="review-inputRV">
-                <div className="review-userRV">11111111111111</div>
+                <div className="review-userRV">yuri</div>
+
                 <div className="review-conRV">
                   <div className="file-boxRV">
                     <div className="file-infoRV">
@@ -449,7 +687,20 @@ const Detail = () => {
                       />
                     </label>
                   </div>
+
                   <div className="text-area-wrap">
+                    {/* ⭐ 별점 선택 UI 추가 */}
+                    <div className="star-ratingRV">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <span
+                          key={star}
+                          className={star <= newRating ? "star filled" : "star"}
+                          onClick={() => setNewRating(star)}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
                     <textarea
                       placeholder={`리뷰 댓글을 작성해주세요.\n*이미지 파일 용량은 1GB 이내로 첨부 가능합니다.`}
                       value={newReview}

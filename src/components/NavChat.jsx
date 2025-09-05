@@ -126,8 +126,8 @@ export default function NavChat() {
 
       {/* 챗봇 박스 */}
       {chatOpen && (
-        <div id="chatBox" ref={chatBoxRef}>
-          <div id="chatHeader" onMouseDown={handleMouseDown}>
+        <div id="chatBox" ref={chatBoxRef} onMouseDown={handleMouseDown}>
+          <div id="chatHeader">
             <button
               type="button"
               className="cbChat"

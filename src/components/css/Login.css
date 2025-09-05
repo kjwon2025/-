@@ -134,42 +134,6 @@
     right: 0;
 }
 
-.lgsnsbox {
-    width: 315px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    position: absolute;
-    top: 402px;
-}
-
-.lgnaverbox,
-.lggooglebox,
-.lgkakaobox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    cursor: pointer;
-}
-
-.lgnaverbox>img,
-.lggooglebox>img,
-.lgkakaobox>img {
-    width: 80px;
-    height: 80px;
-}
-
-.lgnaverbox>span,
-.lggooglebox>span,
-.lgkakaobox>span {
-    font-size: 18px;
-    color: #6C5242;
-    font-weight: 500;
-}
-
 /* 활성화 상태 */
 #loginBox.active {
     pointer-events: auto;
@@ -185,4 +149,175 @@
     background-color: rgba(0, 0, 0, 0.3);
     opacity: 1;
     /* 배경 점점 어둡게 */
+}
+
+.gsi-material-button {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-appearance: none;
+    background-color: #f2f2f2;
+    background-image: none;
+    border: none;
+    -webkit-border-radius: 50%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #1f1f1f;
+    cursor: pointer;
+    font-family: 'Roboto', arial, sans-serif;
+    font-size: 14px;
+    height: 75px;
+    letter-spacing: 0.25px;
+    outline: none;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 75px;
+    min-width: min-content;
+}
+
+.gsi-material-button .gsi-material-button-icon {
+    height: 60px;
+    width: 60px;
+    margin: 0;
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+    -webkit-align-items: center;
+    align-items: center;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    font-family: 'Roboto', arial, sans-serif;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+}
+
+.gsi-material-button .gsi-material-button-state {
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.gsi-material-button:disabled {
+    cursor: default;
+    background-color: #ffffff61;
+}
+
+.gsi-material-button:disabled .gsi-material-button-state {
+    background-color: #1f1f1f1f;
+}
+
+.gsi-material-button:disabled .gsi-material-button-contents {
+    opacity: 38%;
+}
+
+.gsi-material-button:disabled .gsi-material-button-icon {
+    opacity: 38%;
+}
+
+.gsi-material-button:not(:disabled):active .gsi-material-button-state,
+.gsi-material-button:not(:disabled):focus .gsi-material-button-state {
+    background-color: #001d35;
+    opacity: 12%;
+}
+
+
+
+/* 로그인 후 */
+.after-login {
+    position: absolute;
+    top: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* 위-아래 요소 사이 공간 자동 배분 */
+    width: 318px;
+    height: 318px;
+    /* 전체 높이 고정 */
+    box-sizing: border-box;
+    gap: 0;
+    /* justify-content로 간격 조절 */
+}
+
+/* 환영 메시지 박스 */
+.welcome-box {
+    width: 100%;
+    flex: 1;
+    /* 전체 높이에서 공간 비율 */
+    display: flex;
+    align-items: center;
+    /* 수직 중앙 정렬 */
+    justify-content: center;
+    /* 수평 중앙 정렬 */
+    background-color: #FFFEF8;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #6C5242;
+    box-sizing: border-box;
+    padding: 0 10px;
+    /* 좌우 여백 */
+}
+
+/* 버튼 박스 */
+.button-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* 버튼 사이 간격 줄임 */
+    /*     padding: 0 10px 10px; */
+    box-sizing: border-box;
+    justify-content: flex-end;
+    /* 버튼을 아래쪽으로 밀어줌 */
+}
+
+/* 버튼 스타일 */
+.lgloginbtn,
+.lgmembtn {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    font-family: "Hahmlet", serif;
+    font-weight: 500;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* 로그아웃 버튼 */
+.lgloginbtn {
+    background-color: #6C5242;
+    color: #FFFEF8;
+    border: none;
+}
+
+/* 마이페이지 버튼 */
+.lgmembtn {
+    background-color: #FFFEF8;
+    border: 1px solid #6C5242;
+    color: #6C5242;
+
 }

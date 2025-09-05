@@ -29,6 +29,9 @@
     height: 40px;
     margin-top: 20px;
     padding: 0 2px;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
     border-bottom: 2px solid #6C5242;
     background-color: #FFFEF8;
     font-size: 18px;
@@ -57,4 +60,10 @@
 
 #hdmsinputMP>span {
     color: #6C5242;
+}
+
+#hdmsinputMP #hdmsboxMP>input:focus {
+    border-left: none;
+    border-right: none;
+    border-top: none;
 }

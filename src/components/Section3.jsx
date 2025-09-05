@@ -3,8 +3,20 @@ import "./css/Section3.css";
 
 const Section3 = () => {
   const [activeTab, setActiveTab] = useState("tab1");
-  const handleHeartClick = () => {
+  const handleHeartClick = (e) => {
+    e.stopPropagation(); // 이벤트 버블링 방지
     alert("좋아요 목록에 추가되었습니다!");
+
+    const iconDiv = e.target.closest(".s3itemIconMP");
+    if (!iconDiv) return;
+
+    const heart = iconDiv.querySelector(".heart");
+    const heart2 = iconDiv.querySelector(".heart2");
+
+    if (heart && heart2) {
+      heart.style.display = "none";
+      heart2.style.display = "block";
+    }
   };
 
   return (
@@ -15,13 +27,13 @@ const Section3 = () => {
           className={`tabbtn1MP ${activeTab === "tab1" ? "active" : ""}`}
           onClick={() => setActiveTab("tab1")}
         >
-          꽃 다발
+          꽃다발
         </button>
         <button
           className={`tabbtn2MP ${activeTab === "tab2" ? "active" : ""}`}
           onClick={() => setActiveTab("tab2")}
         >
-          꽃 송이
+          꽃송이
         </button>
         <button
           className={`tabbtn3MP ${activeTab === "tab3" ? "active" : ""}`}
@@ -38,28 +50,43 @@ const Section3 = () => {
         >
           <div className="s3item1MP">
             <div className="s3itemImgMP">
-              <img src="./img/s3p1.png" alt="s3p1" />
+              <img className="s3img1" src="./img/s3p1.png" alt="s3p1" />
+              <img className="s3img1-2" src="./img/s3p1-2.jpg" alt="s3p1-2" />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">스위트 헤이즈 꽃다발</span>
+              <span className="s3itemPriceMP">39,900원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -67,28 +94,43 @@ const Section3 = () => {
           <div className="s3line1MP"></div>
           <div className="s3item2MP">
             <div className="s3itemImgMP">
-              <img src="./img/s3p2.png" alt="s3p2" />
+              <img className="s3img2" src="./img/s3p2.png" alt="s3p2" />
+              <img className="s3img2-2" src="./img/s3p2-2.jpg" alt="s3p2-2" />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">화이트 블러쉬 꽃다발</span>
+              <span className="s3itemPriceMP">39,900원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -96,28 +138,43 @@ const Section3 = () => {
           <div className="s3line1MP"></div>
           <div className="s3item3MP">
             <div className="s3itemImgMP">
-              <img src="./img/s3p3.jpg" alt="s3p3" />
+              <img className="s3img3" src="./img/s3p3.jpg" alt="s3p3" />
+              <img className="s3img3-2" src="./img/s3p3-2.jpg" alt="s3p3-2" />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">피치 샤베트 꽃다발</span>
+              <span className="s3itemPriceMP">39,900원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -125,28 +182,43 @@ const Section3 = () => {
           <div className="s3line1MP"></div>
           <div className="s3item4MP">
             <div className="s3itemImgMP">
-              <img src="./img/s3p4.png" alt="s3p4" />
+              <img className="s3img4" src="./img/s3p4.png" alt="s3p4" />
+              <img className="s3img4-2" src="./img/s3p4-2.jpg" alt="s3p4-2" />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">라일락 모먼트 꽃다발</span>
+              <span className="s3itemPriceMP">59,900원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -160,28 +232,47 @@ const Section3 = () => {
         >
           <div className="s3item1MP">
             <div className="s3itemImgMP">
-              <img src="./img/oneflower1.jpg" alt="oneflower1" />
+              <img className="s3img5" src="./img/oneflower1.jpg" alt="s3img5" />
+              <img
+                className="s3img5-2"
+                src="./img/oneflower1-2.jpg"
+                alt="s3p5-2"
+              />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">백합</span>
+              <span className="s3itemPriceMP">4,600원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -189,28 +280,47 @@ const Section3 = () => {
           <div className="s3line1MP"></div>
           <div className="s3item2MP">
             <div className="s3itemImgMP">
-              <img src="./img/oneflower2.jpg" alt="oneflower2" />
+              <img className="s3img6" src="./img/oneflower2.jpg" alt="s3img6" />
+              <img
+                className="s3img6-2"
+                src="./img/oneflower2-2.jpg"
+                alt="s3p6-2"
+              />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">장미 연분홍</span>
+              <span className="s3itemPriceMP">2,800원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -218,28 +328,47 @@ const Section3 = () => {
           <div className="s3line1MP"></div>
           <div className="s3item3MP">
             <div className="s3itemImgMP">
-              <img src="./img/oneflower3.jpg" alt="oneflower3" />
+              <img className="s3img7" src="./img/oneflower3.jpg" alt="s3img7" />
+              <img
+                className="s3img7-2"
+                src="./img/oneflower3-2.jpg"
+                alt="s3p7-2"
+              />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">프리지아 분홍</span>
+              <span className="s3itemPriceMP">3,200원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -247,28 +376,47 @@ const Section3 = () => {
           <div className="s3line1MP"></div>
           <div className="s3item4MP">
             <div className="s3itemImgMP">
-              <img src="./img/oneflower4.jpg" alt="oneflower4" />
+              <img className="s3img8" src="./img/oneflower4.jpg" alt="s3img8" />
+              <img
+                className="s3img8-2"
+                src="./img/oneflower4-2.jpg"
+                alt="s3p8-2"
+              />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">카네이션</span>
+              <span className="s3itemPriceMP">1,600원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -282,28 +430,47 @@ const Section3 = () => {
         >
           <div className="s3item1MP">
             <div className="s3itemImgMP">
-              <img src="./img/basket1.png" alt="basket1" />
+              <img className="s3img9" src="./img/basket1.png" alt="s3img9" />
+              <img
+                className="s3img9-2"
+                src="./img/basket1-2.jpeg"
+                alt="s3p9-2"
+              />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">로맨틱 모먼트 바스켓</span>
+              <span className="s3itemPriceMP">81,000원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -311,28 +478,47 @@ const Section3 = () => {
           <div className="s3line1MP"></div>
           <div className="s3item2MP">
             <div className="s3itemImgMP">
-              <img src="./img/basket2.png" alt="basket2" />
+              <img className="s3img1" src="./img/basket2.png" alt="s3img10" />
+              <img
+                className="s3img10-2"
+                src="./img/basket2-2.jpeg"
+                alt="s3p10-2"
+              />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">블루 위스퍼 바스켓</span>
+              <span className="s3itemPriceMP">66,000원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -340,28 +526,47 @@ const Section3 = () => {
           <div className="s3line1MP"></div>
           <div className="s3item3MP">
             <div className="s3itemImgMP">
-              <img src="./img/basket3.jpg" alt="basket3" />
+              <img className="s3img1" src="./img/basket3.jpg" alt="s3img11" />
+              <img
+                className="s3img11-2"
+                src="./img/basket3-2.jpeg"
+                alt="s3p11-2"
+              />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">스프링 글로우 바스켓</span>
+              <span className="s3itemPriceMP">75,000원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>
@@ -369,28 +574,47 @@ const Section3 = () => {
           <div className="s3line1MP"></div>
           <div className="s3item4MP">
             <div className="s3itemImgMP">
-              <img src="./img/basket4.jpg" alt="basket4" />
+              <img className="s3img1" src="./img/basket4.jpg" alt="s3img12" />
+              <img
+                className="s3img12-2"
+                src="./img/basket4-2.jpeg"
+                alt="s3p12-2"
+              />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">상품명</span>
-              <span className="s3itemPriceMP">상품 가격</span>
+              <span className="s3itemTitleMP">스위트 헤이즈 바스켓</span>
+              <span className="s3itemPriceMP">69,000원</span>
             </div>
             <div className="s3itemIconMP">
               <svg
-                class="heart"
+                className="heart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                onClick={handleHeartClick}
+              >
+                <path
+                  fill="#6C5242"
+                  d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-8.037-2.49a.75.75 0 0 0-.954 1.16zm-4.659-3.009a.75.75 0 1 0 1.316-.72zm.408-4.274c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16zm-5.148 0c-.796-.627-1.605-1.226-2.425-1.901l-.954 1.158c.83.683 1.708 1.335 2.45 1.92zm-5.768-5.63a7.25 7.25 0 0 1-.908-3.555h-1.5c0 1.638.42 3.046 1.092 4.275z"
+                />
+              </svg>
+              <svg
+                className="incart"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#6C5242"
+                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
+                />
+              </svg>
+              <svg
+                className="heart2"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
-                onClick={handleHeartClick}
               >
                 <path
                   fill="#f8312f"
                   d="M21.008 5.162c-2.84.509-5.011 3.905-5.011 3.905s-2.18-3.396-5.012-3.905c-7.012-1.25-9.903 4.993-8.732 9.64c1.73 6.863 10.053 13.014 12.834 14.916c.55.376 1.27.376 1.83 0c2.791-1.902 11.113-8.053 12.834-14.916c1.16-4.647-1.73-10.89-8.743-9.64"
-                />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z"
                 />
               </svg>
             </div>

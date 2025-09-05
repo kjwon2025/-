@@ -1,11 +1,31 @@
-import { useState } from "react";
-import "./css/Community.css"; // ← CSS 위치에 맞게 수정
-import coWrite from "../data/community";
+import { useState, useEffect } from "react";
+import "./css/Community.css";
+import { Link } from "react-router-dom";
 
 const Community = () => {
+  const [posts, setPosts] = useState([]);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (savedUser && savedUser.id) {
+      setUserId(savedUser.id);
+    }
+  }, []);
+
+  // 🔹 컴포넌트 로드 시 localStorage에서 글 불러오기
+  useEffect(() => {
+    const savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
+    setPosts(savedPosts);
+  }, []);
+
   // 글쓰기 드롭다운 상태
   const [selectedWrite, setSelectedWrite] = useState("전체글");
   const [isOpenWrite, setIsOpenWrite] = useState(false);
+
+  // 검색 상태
+  const [searchQuery, setSearchQuery] = useState(""); // 입력값
+  const [searchTerm, setSearchTerm] = useState(""); // 실제 검색어 (검색 버튼 눌러야 반영됨)
 
   // 검색 드롭다운 상태
   const [selectedSearch, setSelectedSearch] = useState("전체글");
@@ -19,8 +39,41 @@ const Community = () => {
 
   const postsPerPage = 5; // 한 페이지 글 수
   const pagesPerGroup = 5; // 그룹당 페이지 버튼
-  const totalPages = Math.max(5, Math.ceil(coWrite.length / postsPerPage));
-  // 현재 그룹의 시작/끝 페이지
+
+  // ✅ 선택된 옵션에 따라 글 필터링
+  let filteredPosts =
+    selectedWrite === "내가 작성한 글"
+      ? posts.filter((p) => p.name === userId)
+      : posts;
+
+  // ✅ 검색어 적용 (검색 버튼 눌러야 반영됨)
+  if (searchTerm.trim() !== "") {
+    filteredPosts = filteredPosts.filter((p) => {
+      if (selectedSearch === "제목") {
+        return p.title.includes(searchTerm);
+      }
+      if (selectedSearch === "작성자") {
+        return p.name.includes(searchTerm);
+      }
+      if (selectedSearch === "내용") {
+        return p.content.includes(searchTerm);
+      }
+      if (selectedSearch === "전체글") {
+        return (
+          p.title.includes(searchTerm) ||
+          p.name.includes(searchTerm) ||
+          p.content.includes(searchTerm)
+        );
+      }
+      return true;
+    });
+  }
+
+  // ✅ 페이지 계산 (filteredPosts 기준)
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredPosts.length / postsPerPage)
+  );
   const startPage = pageGroup * pagesPerGroup + 1;
   const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
 
@@ -32,9 +85,9 @@ const Community = () => {
   // ✅ 현재 페이지에 보여줄 글
   const startIndex = (activePage - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage;
-  const currentPosts = coWrite.slice(startIndex, endIndex);
+  const currentPosts = filteredPosts.slice(startIndex, endIndex);
 
-  const [selectedMenu, setSelectedMenu] = useState("게시판"); // ✅ 기본 선택 메뉴
+  const [selectedMenu, setSelectedMenu] = useState("게시판");
 
   return (
     <div id="community">
@@ -63,7 +116,6 @@ const Community = () => {
             <span className="iconamoon--arrow-down-2-light"></span>
           </div>
 
-          {/* 옵션 리스트 */}
           {isOpenWrite && (
             <ul className="co_himdel">
               {writeOptions
@@ -74,6 +126,7 @@ const Community = () => {
                     onClick={() => {
                       setSelectedWrite(opt);
                       setIsOpenWrite(false);
+                      setActivePage(1); // ✅ 페이지 초기화
                     }}
                   >
                     {opt}
@@ -82,9 +135,9 @@ const Community = () => {
             </ul>
           )}
         </div>
-        <a href="#none" className="co_write">
+        <Link to="/BoardWrite" className="co_write">
           글쓰기
-        </a>
+        </Link>
       </div>
 
       <div id="co_bullSection">
@@ -97,143 +150,157 @@ const Community = () => {
           <div>조회</div>
         </div>
 
-        {currentPosts.map((a, i) => (
-          <article className="co_review" key={i}>
-            {/* 글 번호 (전체 기준으로 계산) */}
-            <div className="co_number">
-              {String(startIndex + i + 1).padStart(2, "0")}
-            </div>
+        {/* ✅ 검색 결과 없을 때 */}
+        {currentPosts.length === 0 ? (
+          <div className="coNoPosts">해당 게시글이 존재하지 않습니다.</div>
+        ) : (
+          currentPosts.map((a, i) => (
+            <article className="co_review" key={i}>
+              <div className="co_number">
+                {String(startIndex + i + 1).padStart(2, "0")}
+              </div>
 
-            <div className="co_product">
-              <a href="#none" className="thumb">
-                <img src={a.productImg} alt={a.productImg} />
+              <div className="co_product">
+                <a href="#none" className="thumb">
+                  <img src={a.productImg} alt="썸네일" />
+                </a>
+              </div>
+
+              <a href="#none" className="co_boardTitle">
+                <strong>{a.title}</strong>
+                <p dangerouslySetInnerHTML={{ __html: a.content }} />
               </a>
-            </div>
 
-            <a href="#none" className="co_boardTitle">
-              <strong>{a.title}</strong>
-              <p dangerouslySetInnerHTML={{ __html: a.content }} />
-            </a>
+              <div className="co_name">{a.name}</div>
+              <div className="co_date">{a.date}</div>
+              <div className="co_views">{a.views}</div>
+            </article>
+          ))
+        )}
+      </div>
 
-            <div className="co_name">{a.name}</div>
-            <div className="co_date">{a.date}</div>
-            <div className="co_views">{a.views}</div>
-          </article>
-        ))}
-
-        <div className="co_search">
-          <div className="co_searchTitle">
-            {/* 검색 옵션 드롭다운 */}
-            <div
-              className="co_optionSee"
-              onClick={() => setIsOpenSearch(!isOpenSearch)}
-            >
-              <p>{selectedSearch}</p>
-              <span className="iconamoon--arrow-down-2-light"></span>
-            </div>
-
-            {isOpenSearch && (
-              <ul className="co_options">
-                {searchOptions
-                  .filter((opt) => opt !== selectedSearch)
-                  .map((opt) => (
-                    <li
-                      key={opt}
-                      onClick={() => {
-                        setSelectedSearch(opt);
-                        setIsOpenSearch(false);
-                      }}
-                    >
-                      {opt}
-                    </li>
-                  ))}
-              </ul>
-            )}
+      {/* 🔎 검색창 */}
+      <div className="co_search">
+        <div className="co_searchTitle">
+          <div
+            className="co_optionSee"
+            onClick={() => setIsOpenSearch(!isOpenSearch)}
+          >
+            <p>{selectedSearch}</p>
+            <span className="iconamoon--arrow-down-2-light"></span>
           </div>
 
-          <input
-            type="text"
-            className="co_searchInput"
-            placeholder="내용을 입력하세요"
-          />
-          <button className="co_searchBtn">검색</button>
+          {isOpenSearch && (
+            <ul className="co_options">
+              {searchOptions
+                .filter((opt) => opt !== selectedSearch)
+                .map((opt) => (
+                  <li
+                    key={opt}
+                    onClick={() => {
+                      setSelectedSearch(opt);
+                      setIsOpenSearch(false);
+                    }}
+                  >
+                    {opt}
+                  </li>
+                ))}
+            </ul>
+          )}
         </div>
 
-        {/* ✅ 페이지네이션 */}
-        <div className="co_page">
-          <ul>
-            <li>
+        <input
+          type="text"
+          className="co_searchInput"
+          placeholder="내용을 입력하세요"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)} // ✅ 입력 시 업데이트
+        />
+        <button
+          className="co_searchBtn"
+          onClick={() => {
+            setSearchTerm(searchQuery); // ✅ 검색 버튼 눌렀을 때 반영
+            setActivePage(1); // 첫 페이지로 이동
+          }}
+        >
+          검색
+        </button>
+      </div>
+
+      {/* 🔹 페이지네이션 */}
+      <div className="co_page">
+        <ul>
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                if (pageGroup > 0) {
+                  setPageGroup(pageGroup - 1);
+                  setActivePage((pageGroup - 1) * pagesPerGroup + 1);
+                }
+              }}
+            >
+              &laquo;
+            </button>
+          </li>
+
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                if (activePage > 1) {
+                  const prevPage = activePage - 1;
+                  setActivePage(prevPage);
+                  if (prevPage < startPage) setPageGroup(pageGroup - 1);
+                }
+              }}
+            >
+              &lsaquo;
+            </button>
+          </li>
+
+          {pageNumbers.map((num) => (
+            <li key={num}>
               <button
                 type="button"
-                onClick={() => {
-                  if (pageGroup > 0) {
-                    setPageGroup(pageGroup - 1);
-                    setActivePage((pageGroup - 1) * pagesPerGroup + 1);
-                  }
-                }}
+                className={activePage === num ? "active" : ""}
+                onClick={() => setActivePage(num)}
               >
-                &laquo;
+                {num}
               </button>
             </li>
+          ))}
 
-            <li>
-              <button
-                type="button"
-                onClick={() => {
-                  if (activePage > 1) {
-                    const prevPage = activePage - 1;
-                    setActivePage(prevPage);
-                    if (prevPage < startPage) setPageGroup(pageGroup - 1);
-                  }
-                }}
-              >
-                &lsaquo;
-              </button>
-            </li>
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                if (activePage < totalPages) {
+                  const nextPage = activePage + 1;
+                  setActivePage(nextPage);
+                  if (nextPage > endPage) setPageGroup(pageGroup + 1);
+                }
+              }}
+            >
+              &rsaquo;
+            </button>
+          </li>
 
-            {pageNumbers.map((num) => (
-              <li key={num}>
-                <button
-                  type="button"
-                  className={activePage === num ? "active" : ""}
-                  onClick={() => setActivePage(num)}
-                >
-                  {num}
-                </button>
-              </li>
-            ))}
-
-            <li>
-              <button
-                type="button"
-                onClick={() => {
-                  if (activePage < totalPages) {
-                    const nextPage = activePage + 1;
-                    setActivePage(nextPage);
-                    if (nextPage > endPage) setPageGroup(pageGroup + 1);
-                  }
-                }}
-              >
-                &rsaquo;
-              </button>
-            </li>
-
-            <li>
-              <button
-                type="button"
-                onClick={() => {
-                  if (endPage < totalPages) {
-                    const nextGroup = pageGroup + 1;
-                    setPageGroup(nextGroup);
-                    setActivePage(nextGroup * pagesPerGroup + 1);
-                  }
-                }}
-              >
-                &raquo;
-              </button>
-            </li>
-          </ul>
-        </div>
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                if (endPage < totalPages) {
+                  const nextGroup = pageGroup + 1;
+                  setPageGroup(nextGroup);
+                  setActivePage(nextGroup * pagesPerGroup + 1);
+                }
+              }}
+            >
+              &raquo;
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   );

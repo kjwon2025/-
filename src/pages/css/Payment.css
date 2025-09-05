@@ -11,7 +11,8 @@
 }
 
 .h1PM {
-    font-size: 50px;
+    font-size: 40px;
+    font-weight: 600;
     margin-bottom: 10px;
 }
 
@@ -20,7 +21,12 @@
     border-top: 1px solid #6C5242;
 }
 
-.conboxPM input:focus {
+.buyinfoPM>input:focus,
+.sendPM>input:focus,
+.placeinfoPM>input:focus,
+.cpinfoPM>input:focus,
+.pwcardPM>input:focus,
+.pwymPM>input:focus {
     border: 1px solid #6C5242;
 }
 
@@ -91,6 +97,7 @@
 .howbPM {
     border-bottom: 1px solid #6C5242;
     margin-bottom: 50px;
+    position: relative;
 }
 
 .picbPM {
@@ -100,9 +107,28 @@
     font-size: 15px;
 }
 
-.picbPM>input {
-    width: 15px;
-    height: 15px;
+.picbPM>input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    top: 2px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #FFE9E9;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.picbPM>input[type="checkbox"]:checked {
+    background-color: #FFE9E9;
+}
+
+.picbPM>input[type="checkbox"]:checked::after {
+    content: "✔";
+    color: #6C5242;
 }
 
 .buyinfoPM,
@@ -146,11 +172,7 @@
     cursor: pointer;
 }
 
-.pwbtn1PM {
-    background-color: #6C5242;
-    color: #FFFEF8;
-}
-
+.pwbtn1PM,
 .pwbtn2PM {
     background-color: #FFE9E9;
     color: #6C5242;
@@ -217,14 +239,33 @@
     color: #bbb;
 }
 
-.hdivPM {
+.howbPM>div {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.hdiv1PM {
     width: 100px;
     height: 46px;
     background-color: #6C5242;
     color: #FFFEF8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    text-align: center;
+    line-height: 46px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+}
+
+.hdiv2PM {
+    width: 100px;
+    height: 46px;
+    background-color: #6C5242;
+    color: #FFFEF8;
+    display: none;
+    text-align: center;
+    line-height: 46px;
     font-size: 18px;
     font-weight: bold;
     border-radius: 8px 8px 0 0;
@@ -311,4 +352,37 @@
     padding: 10px 0;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.bankInfoPM {
+    margin: 30px 0 50px 0;
+    padding: 20px;
+    border: 1px solid #6C5242;
+    background-color: #FFFEF8;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.bankInfoPM h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #6C5242;
+}
+
+.bankInfoPM strong {
+    font-weight: 600;
+    color: #6C5242;
+}
+
+.bankNoticePM {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #C0392B;
+    font-weight: 500;
+}
+
+.selectedPM {
+    background-color: #6C5242;
+    color: #FFFEF8;
 }

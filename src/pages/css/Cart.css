@@ -1,47 +1,88 @@
 #s1CT {
     width: 100%;
-    margin: 55px 0 100px 0;
+    height: auto;
+    margin: 55px 0 80px 0;
 }
 
 #s1boxCT {
     width: 1200px;
-    height: 100%;
+    height: 563px;
     margin: 0 auto;
 }
 
 .h1CT {
-    font-size: 50px;
-    margin-bottom: 50px;
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 80px;
+    color: #6C5242;
+}
+
+.cartitemCT {
+    width: 802px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.checkconCT {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #6C5242;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.checkconCT>input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    top: 1px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #FFE9E9;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.checkconCT>input[type="checkbox"]:checked {
+    background-color: #FFE9E9;
+}
+
+.checkconCT>input[type="checkbox"]:checked::after {
+    content: "✔";
     color: #6C5242;
 }
 
 .s1contentCT {
-    width: 100%;
-    height: 500px;
+    width: 1198px;
+    height: 185px;
     display: flex;
-    border: 1px solid #6C5242;
     font-weight: 500;
 }
 
 .s1contentCT .ctc1CT {
     width: 800px;
-    height: 500px;
-    border-right: 1px solid #6C5242;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
 
 .s1contentCT .ctc1CT .tboxCT {
     width: 100%;
-    height: 250px;
-    border-bottom: 1px solid #6C5242;
+    height: 185px;
     display: flex;
     align-items: center;
+    border: 1px solid #6C5242;
 }
 
 .tboxCT>div {
     width: 200px;
-    height: 250px;
+    height: 184px;
     border-right: 1px solid #6C5242;
     display: flex;
     align-items: center;
@@ -54,8 +95,8 @@
 }
 
 .cartimgCT>img {
-    width: 180px;
-    height: 230px;
+    width: 175px;
+    height: 165px;
 }
 
 .iteminfoCT {
@@ -70,7 +111,7 @@
     font-size: 20px;
 }
 
-.iteminfoCT .pnmboxCT {
+.pnmboxCT {
     width: 130px;
     height: 30px;
     border: 1px solid #6C5242;
@@ -79,16 +120,18 @@
     align-items: center;
     justify-content: space-between;
     padding: 5px 10px;
+    color: #6C5242;
 }
 
-.iteminfoCT .pnmboxCT>svg {
-    width: 26px;
-    cursor: pointer;
-}
-
-.iteminfoCT .pnmboxCT .pnmcountCT {
+.pnmboxCT .pnmcountCT {
     font-size: 20px;
     font-weight: 500;
+}
+
+.optCT {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .optCT .optinfoCT {
@@ -103,14 +146,14 @@
 
 .s1contentCT .ctc1CT .bboxCT {
     width: 100%;
-    height: 250px;
+    height: 185px;
     display: flex;
     align-items: center;
 }
 
 .bboxCT>div {
     width: 200px;
-    height: 250px;
+    height: 185px;
     border-right: 1px solid #6C5242;
     display: flex;
     align-items: center;
@@ -122,40 +165,57 @@
     border: none;
 }
 
-.s1contentCT .ctc2CT {
-    width: 440px;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-}
-
-.s1contentCT .ctc2CT .resultCT {
-    width: 100%;
-    height: 400px;
-    border-bottom: 1px solid #6C5242;
+.ctc2CT {
+    width: 390px;
+    height: 185px;
+    border: 1px solid #6C5242;
+    color: #6C5242;
+    font-size: 25px;
+    font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #6C5242;
-    font-size: 20px;
+    position: absolute;
+    top: 352px;
+    right: 308px;
 }
 
-.s1contentCT .ctc2CT .buybtnCT {
+.btnsCT {
+    margin: 80px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 600px;
+    height: 60px;
+}
+
+.removebtnCT {
+    width: 300px;
+    height: 60px;
+    background-color: #FFE9E9;
+    color: #6C5242;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.buybtnCT {
+    width: 300px;
+    height: 60px;
     background-color: #6C5242;
     color: #fffef8;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100px;
-    font-size: 30px;
-    font-weight: bold;
-    cursor: pointer;
+    font-size: 22px;
+    font-weight: 500;
+    border-radius: 10px;
 }
 
 #s1noneCT {
     width: 100%;
-    display: none;
 }
 
 #noneboxCT {
@@ -165,9 +225,10 @@
 }
 
 .noneh1CT {
-    font-size: 50px;
+    font-size: 40px;
     margin-bottom: 50px;
     color: #6C5242;
+    font-weight: 600;
 }
 
 .nonecontentCT {
@@ -176,7 +237,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    margin-top: 200px;
     gap: 50px;
 }
 
@@ -208,4 +269,7 @@
 .pnm-btn {
     background-color: transparent;
     color: #6C5242;
+    cursor: pointer;
+    font-size: 25px;
+    margin-bottom: 6px;
 }

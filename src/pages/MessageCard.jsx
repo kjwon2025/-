@@ -1,9 +1,22 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./css/MessageCard.css";
-import { useNavigate } from "react-router-dom";
 
 export default function MessageCard() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const {
+    productName = "메리골드 위시",
+    price = 59900,
+    mainCount = 1,
+    optionName = "크리스탈 화병",
+    optionPrice = 12000,
+    optionCount = 1,
+    deliveryType = ["normal", "today"],
+  } = location.state || {};
+
+  const totalPrice = price * mainCount + optionPrice * optionCount;
 
   const categories = [
     { name: "DIY", img: "./img/mc_card.png" },
@@ -13,7 +26,6 @@ export default function MessageCard() {
     { name: "내가 널 응원해 !", img: "./img/mc_card5.png" },
   ];
 
-  // 첫 번째 카테고리(DIY) 기본 선택
   const [category, setCategory] = useState(categories[0].name);
   const [message, setMessage] = useState("");
 
@@ -28,12 +40,38 @@ export default function MessageCard() {
   };
 
   const handleSubmit = () => {
-    navigate("/payment");
+    navigate("/payment", {
+      state: {
+        productName,
+        price,
+        mainCount,
+        optionName,
+        optionPrice,
+        optionCount,
+        totalPrice,
+        deliveryType,
+      },
+    });
     window.scrollTo(0, 0);
   };
 
-  // 선택된 카테고리의 이미지 가져오기
   const selectedImage = categories.find((cat) => cat.name === category)?.img;
+
+  const { cartItems } = location.state || {};
+
+  // 선택한 상품만 products 배열로 설정
+  const products =
+    cartItems && cartItems.length > 0
+      ? cartItems.map((item) => ({
+          productName: item.name,
+          price: item.price,
+          mainCount: item.qty,
+          optionName: item.optionLabel,
+          optionPrice: item.optionPrice,
+          optionCount: item.optionQty || 0,
+          deliveryType: item.deliveryType || ["normal"], // 필요시 기본값
+        }))
+      : [];
 
   return (
     <div>
@@ -43,18 +81,37 @@ export default function MessageCard() {
         <div className="sec1contentMC">
           <div className="sec1leftMC"></div>
           <div className="sec1rightMC">
-            <div className="sec1todaybtnMC">오늘배송</div>
+            <div className="sec1todaybtnMC">
+              {Array.isArray(deliveryType)
+                ? deliveryType.includes("today")
+                  ? "오늘배송"
+                  : "일반배송"
+                : deliveryType === "today"
+                ? "오늘배송"
+                : "일반배송"}
+            </div>
             <div className="sec1textMC">
-              <br />
-              메리골드 위시
-              <br />
-              49,900원 / 1개
-              <br />
-              크리스탈 화병(+12,000원 x1)
-              <br />
-              <br />
-              <br />
-              <span>합계 71,900원</span>
+              {products.map((item, idx) => {
+                const totalPrice =
+                  item.price * item.mainCount +
+                  item.optionPrice * item.optionCount;
+                return (
+                  <div key={idx} className="product-summaryMC">
+                    <div>{item.productName}</div>
+                    <br />
+                    <div>
+                      {item.price.toLocaleString()}원 x {item.mainCount}개
+                    </div>
+                    <div>
+                      {item.optionName}(+{item.optionPrice.toLocaleString()}원 x{" "}
+                      {item.optionCount})
+                    </div>
+                    <br />
+                    <div>합계 {totalPrice.toLocaleString()}원</div>
+                    <hr />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -84,12 +141,12 @@ export default function MessageCard() {
           </div>
           <div className="sec2bottomrightMC">
             <div className="input-containerMC">
-              <div className="input-headerMC">내용을 입력해주세요</div>
               <textarea
                 id="messageMC"
                 value={message}
                 onChange={handleMessageChange}
                 maxLength={250}
+                placeholder="내용을 입력해주세요."
               />
               <div className="char-countMC">
                 <span id="charCountMC">{message.length}</span>/250

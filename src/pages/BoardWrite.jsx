@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/BoardWrite.css";
+import { Link } from "react-router-dom";
 
 const BoardWrite = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [file, setFile] = useState(null);
+  const [userId, setUserId] = useState("");
+
+  // 로그인된 유저 가져오기
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (savedUser && savedUser.id) {
+      setUserId(savedUser.id); // 로그인된 유저 아이디
+    }
+  }, []);
 
   const handleFileChange = (e) => {
     if (e.target.files.length > 0) {
@@ -16,8 +26,46 @@ const BoardWrite = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 여기에 게시글 작성 로직 추가
-    console.log({ title, content, file });
+
+    if (file) {
+      // 파일이 있을 경우 -> base64 변환
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        savePost(reader.result); // base64 결과 저장
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // 파일 없으면 기본 이미지 저장
+      savePost("/img/ca_img01.png");
+    }
+  };
+
+  /*  const newPost = {
+      title,
+      content,
+      productImg: file ? URL.createObjectURL(file) : "/img/default.png",
+      name: userId, // 작성자
+      date: new Date().toISOString().slice(0, 10),
+      views: 0,
+    }; */
+
+  const savePost = (imageData) => {
+    const newPost = {
+      title,
+      content,
+      productImg: imageData, // ← base64 문자열 또는 기본 이미지 경로
+      name: userId,
+      date: new Date().toISOString().slice(0, 10),
+      views: 0,
+    };
+
+    // localStorage에 저장
+    const savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
+    savedPosts.unshift(newPost);
+    localStorage.setItem("posts", JSON.stringify(savedPosts));
+
+    alert("글이 작성되었습니다!");
+    window.location.href = "/Community"; // 작성 후 게시판으로 이동
   };
 
   return (
@@ -36,7 +84,7 @@ const BoardWrite = () => {
                   type="text"
                   id="userId"
                   name="userId"
-                  value="yuri"
+                  value={userId}
                   readOnly
                 />
               </div>
