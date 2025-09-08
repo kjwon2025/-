@@ -54,7 +54,7 @@ const Section3 = () => {
               <img className="s3img1-2" src="./img/s3p1-2.jpg" alt="s3p1-2" />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">스위트 헤이즈 꽃다발</span>
+              <span className="s3itemTitleMP">화이트 블러쉬 꽃다발</span>
               <span className="s3itemPriceMP">39,900원</span>
             </div>
             <div className="s3itemIconMP">
@@ -98,7 +98,7 @@ const Section3 = () => {
               <img className="s3img2-2" src="./img/s3p2-2.jpg" alt="s3p2-2" />
             </div>
             <div className="s3itemTextMP">
-              <span className="s3itemTitleMP">화이트 블러쉬 꽃다발</span>
+              <span className="s3itemTitleMP">스위트 헤이즈 꽃다발</span>
               <span className="s3itemPriceMP">39,900원</span>
             </div>
             <div className="s3itemIconMP">

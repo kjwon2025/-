@@ -154,29 +154,35 @@ const Community = () => {
         {currentPosts.length === 0 ? (
           <div className="coNoPosts">해당 게시글이 존재하지 않습니다.</div>
         ) : (
-          currentPosts.map((a, i) => (
+          currentPosts.map((a, i) => {
+            const postIndex = startIndex + i; // ← 여기서 선언해야 함
+            return(
             <article className="co_review" key={i}>
               <div className="co_number">
                 {String(startIndex + i + 1).padStart(2, "0")}
               </div>
 
-              <div className="co_product">
-                <a href="#none" className="thumb">
-                  <img src={a.productImg} alt="썸네일" />
-                </a>
-              </div>
+             <div className="co_product">
+                  {/* ✅ 이미지 클릭 → BoardEdit 이동 */}
+                  <Link to={`/BoardEdit/${postIndex}`} className="thumb">
+                    <img src={a.productImg} alt="썸네일" />
+                  </Link>
+                </div>
 
-              <a href="#none" className="co_boardTitle">
-                <strong>{a.title}</strong>
-                <p dangerouslySetInnerHTML={{ __html: a.content }} />
-              </a>
+              {/* ✅ 제목 클릭 → BoardEdit 이동 */}
+                <Link to={`/BoardEdit/${postIndex}`} className="co_boardTitle">
+                  <strong>{a.title}</strong>
+                  <p dangerouslySetInnerHTML={{ __html: a.content }} />
+                </Link>
 
               <div className="co_name">{a.name}</div>
               <div className="co_date">{a.date}</div>
               <div className="co_views">{a.views}</div>
             </article>
-          ))
+            );
+})
         )}
+      
       </div>
 
       {/* 🔎 검색창 */}

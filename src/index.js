@@ -15,13 +15,13 @@ import AuthProvider from './context/SocialLog_data';  // ✅ 경로 확인 필�
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Provider store={store}>
-        <AuthProvider>       {/* ✅ AuthProvider로 감싸기 */}
-          <App />
-        </AuthProvider>
-      </Provider>
-    </BrowserRouter>
+    <BrowserRouter>
+  <Provider store={store}>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </Provider>
+</BrowserRouter>
   </React.StrictMode>
 );
 
