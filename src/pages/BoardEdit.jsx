@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./css/BoardEdit.css";  // ⚡️ BoardEdit 전용 CSS 파일
+import "./css/BoardEdit.css"; // ⚡️ BoardEdit 전용 CSS 파일
 import { useParams, useNavigate } from "react-router-dom";
 
 const BoardEdit = () => {
@@ -10,13 +10,13 @@ const BoardEdit = () => {
   const [content, setContent] = useState("");
   const [file, setFile] = useState(null);
   const [userId, setUserId] = useState("");
-   const [authorId, setAuthorId] = useState(""); // 🔹 원글 작성자 아이디 저장
+  const [authorId, setAuthorId] = useState(""); // 🔹 원글 작성자 아이디 저장
 
   // 기존 글 불러오기
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (savedUser && savedUser.id) {
-      setUserId(savedUser.id);
+      setUserId(savedUser.id); // 현재 로그인 사용자
     }
 
     const savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
@@ -48,6 +48,7 @@ const BoardEdit = () => {
     const savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
 
     const updatePost = (imageData) => {
+      const shortId = userId.includes("@") ? userId.split("@")[0] : userId;
       const updated = savedPosts.map((p, i) =>
         i === Number(id)
           ? {
@@ -55,6 +56,7 @@ const BoardEdit = () => {
               title,
               content,
               productImg: file ? imageData : p.productImg,
+              name: shortId, // ✅ 수정 시에도 줄여서 저장
             }
           : p
       );
@@ -76,7 +78,7 @@ const BoardEdit = () => {
 
   // 글 삭제
   const handleDelete = () => {
-     if (userId !== authorId) {
+    if (userId !== authorId) {
       alert("본인 글만 삭제할 수 있습니다.");
       return;
     }
@@ -111,15 +113,6 @@ const BoardEdit = () => {
                   readOnly
                 />
               </div>
-              <div className="Esec2inputQA">
-                <label htmlFor="password">비밀번호</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="게시글 수정/삭제 시 사용할 비밀번호"
-                />
-              </div>
             </div>
           </div>
         </div>
@@ -130,7 +123,6 @@ const BoardEdit = () => {
         <div className="Esec3innerQA">
           <div className="Esec3leftQA">게시글 내용</div>
           <div className="Esec3rightQA">
-            {/* 제목 */}
             <div className="Esec3inputQA">
               <label htmlFor="title">제목</label>
               <input
@@ -139,11 +131,10 @@ const BoardEdit = () => {
                 placeholder="제목을 입력하세요."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                 disabled={userId !== authorId} // 본인 아닐 시 수정 불가
+                disabled={userId !== authorId} // 본인 아닐 시 수정 불가
               />
             </div>
 
-            {/* 게시글 내용 */}
             <div className="Esec3inputQA">
               <label htmlFor="content">게시글 내용</label>
               <textarea
@@ -155,7 +146,6 @@ const BoardEdit = () => {
               />
             </div>
 
-            {/* 파일 첨부 */}
             <div className="Esec3inputQA EfileGroup">
               <label htmlFor="file">파일첨부</label>
               <div className="Efile-wrapperQA">
@@ -175,6 +165,7 @@ const BoardEdit = () => {
                   id="file"
                   hidden
                   onChange={handleFileChange}
+                  disabled={userId !== authorId}
                 />
               </div>
               <span className="EfileNote">*용량은 500MB이내</span>
@@ -184,14 +175,16 @@ const BoardEdit = () => {
       </div>
 
       {/* 수정/삭제 버튼 */}
-      <div id="Esec5QA">
-        <button className="Esec5buttomQA" onClick={handleUpdate}>
-          수정완료
-        </button>
-        <button className="Esec5buttomQA" onClick={handleDelete}>
-          삭제
-        </button>
-      </div>
+      {userId === authorId && (
+        <div id="Esec5QA">
+          <button className="Esec5buttomQA" onClick={handleUpdate}>
+            수정완료
+          </button>
+          <button className="Esec5buttomQA" onClick={handleDelete}>
+            삭제
+          </button>
+        </div>
+      )}
     </div>
   );
 };

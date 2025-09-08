@@ -1,6 +1,21 @@
-import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
 import "./css/Section4.css";
+
+import s4video1 from "../video/s4video1.mp4";
+import s4video2 from "../video/s4video2.mp4";
+import s4video3 from "../video/s4video3.mp4";
+import s4video4 from "../video/s4video4.mp4";
+import s4video5 from "../video/s4video5.mp4";
+import s4video6 from "../video/s4video6.mp4";
+
+import s4img1_1 from "../img/s4img1_1.jpg";
+import s4img2_1 from "../img/s4img2_1.jpg";
+import s4img3_1 from "../img/s4img3_1.jpg";
+import s4img4_1 from "../img/s4img4_1.jpg";
+import s4img5_1 from "../img/s4img5_1.jpg";
+import s4img6_1 from "../img/s4img6_1.jpg";
+import s4img7_1 from "../img/s4img7_1.jpg";
+import s4img8_1 from "../img/s4img8_1.jpg";
 
 const Section4 = () => {
   const scrollRef = useRef(null);
@@ -64,12 +79,6 @@ const Section4 = () => {
   return (
     <div id="s4MP">
       <h1>핀스타그램</h1>
-      <div className="s4instabox">
-        <span className="s4instaspan1">OFFICIAL PIN-A</span>
-        <Link to="https://www.instagram.com/pinaanippinaanip/">
-          <span className="s4instaspan2">@pinaanippinaanip</span>
-        </Link>
-      </div>
       <div id="s4conMP" ref={containerRef}>
         <div className="s4scroll" ref={scrollRef}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8].map((num, idx) => {
@@ -87,7 +96,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <video
-                    src={`${process.env.PUBLIC_URL}/video/s4video1.mp4`}
+                    src={s4video1}
                     autoPlay
                     loop
                     muted
@@ -116,7 +125,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/s4img1_1.jpg`}
+                    src={s4img1_1}
                     alt="s4img1_1"
                     style={{
                       width: "100%",
@@ -141,7 +150,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <video
-                    src={`${process.env.PUBLIC_URL}/video/s4video2.mp4`}
+                    src={s4video2}
                     autoPlay
                     loop
                     muted
@@ -170,7 +179,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <video
-                    src={`${process.env.PUBLIC_URL}/video/s4video3.mp4`}
+                    src={s4video3}
                     autoPlay
                     loop
                     muted
@@ -199,7 +208,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/s4img2_1.jpg`}
+                    src={s4img2_1}
                     alt="s4img2_1"
                     style={{
                       width: "100%",
@@ -224,7 +233,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/s4img3_1.jpg`}
+                    src={s4img3_1}
                     alt="s4img3_1"
                     style={{
                       width: "100%",
@@ -249,7 +258,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/s4img4_1.jpg`}
+                    src={s4img4_1}
                     alt="s4img4_1"
                     style={{
                       width: "100%",
@@ -274,7 +283,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <video
-                    src={`${process.env.PUBLIC_URL}/video/s4video4.mp4`}
+                    src={s4video4}
                     autoPlay
                     loop
                     muted
@@ -303,7 +312,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/s4img5_1.jpg`}
+                    src={s4img5_1}
                     alt="s4img5_1"
                     style={{
                       width: "100%",
@@ -328,7 +337,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <video
-                    src={`${process.env.PUBLIC_URL}/video/s4video5.mp4`}
+                    src={s4video5}
                     autoPlay
                     loop
                     muted
@@ -357,7 +366,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <video
-                    src={`${process.env.PUBLIC_URL}/video/s4video6.mp4`}
+                    src={s4video6}
                     autoPlay
                     loop
                     muted
@@ -386,7 +395,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/s4img6_1.jpg`}
+                    src={s4img6_1}
                     alt="s4img6_1"
                     style={{
                       width: "100%",
@@ -411,7 +420,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/s4img7_1.jpg`}
+                    src={s4img7_1}
                     alt="s4img7_1"
                     style={{
                       width: "100%",
@@ -436,7 +445,7 @@ const Section4 = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/s4img8_1.jpg`}
+                    src={s4img8_1}
                     alt="s4img8_1"
                     style={{
                       width: "100%",

@@ -9,7 +9,11 @@ const Community = () => {
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (savedUser && savedUser.id) {
-      setUserId(savedUser.id);
+      // @ 앞까지만 잘라서 표시
+      const shortId = savedUser.id.includes("@")
+        ? savedUser.id.split("@")[0]
+        : savedUser.id;
+      setUserId(shortId);
     }
   }, []);
 
@@ -156,33 +160,32 @@ const Community = () => {
         ) : (
           currentPosts.map((a, i) => {
             const postIndex = startIndex + i; // ← 여기서 선언해야 함
-            return(
-            <article className="co_review" key={i}>
-              <div className="co_number">
-                {String(startIndex + i + 1).padStart(2, "0")}
-              </div>
+            return (
+              <article className="co_review" key={i}>
+                <div className="co_number">
+                  {String(startIndex + i + 1).padStart(2, "0")}
+                </div>
 
-             <div className="co_product">
+                <div className="co_product">
                   {/* ✅ 이미지 클릭 → BoardEdit 이동 */}
                   <Link to={`/BoardEdit/${postIndex}`} className="thumb">
                     <img src={a.productImg} alt="썸네일" />
                   </Link>
                 </div>
 
-              {/* ✅ 제목 클릭 → BoardEdit 이동 */}
+                {/* ✅ 제목 클릭 → BoardEdit 이동 */}
                 <Link to={`/BoardEdit/${postIndex}`} className="co_boardTitle">
                   <strong>{a.title}</strong>
                   <p dangerouslySetInnerHTML={{ __html: a.content }} />
                 </Link>
 
-              <div className="co_name">{a.name}</div>
-              <div className="co_date">{a.date}</div>
-              <div className="co_views">{a.views}</div>
-            </article>
+                <div className="co_name">{a.name}</div>
+                <div className="co_date">{a.date}</div>
+                <div className="co_views">{a.views}</div>
+              </article>
             );
-})
+          })
         )}
-      
       </div>
 
       {/* 🔎 검색창 */}

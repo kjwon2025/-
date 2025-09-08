@@ -427,7 +427,6 @@ li {
     font-weight: 600;
     padding: 40px 0;
     border-top: 1px solid #e6dbd2;
-    /* border-bottom: 1px solid #e6dbd2; */
     margin: 16px 0;
 }
 
@@ -500,34 +499,26 @@ li {
 
 /* 쿠폰 리스트 */
 .coupon_list {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 20px 0;
+    margin: 16px 0;
     padding: 0;
-    border-top:1px solid #e6dbd2;
+    border-top: 1px solid #e6dbd2;
 }
 
-/* 개별 쿠폰 카드 */
-.coupon_item {
-    border-bottom: 1px solid #e6dbd2;
-    border-radius: 10px;
-    padding: 20px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-/* 쿠폰 텍스트 */
-.coupon_text {
-    font-size: 18px;
+.coupon_list li {
+    padding: 25px 18px;
+    font-size: 16px;
     font-weight: 600;
     color: #6c5242;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e6dbd2;
 }
 
-/* 유효기간 */
-.coupon_date {
-    font-size: 14px;
+.coupon_expire {
+    font-size: 16px;
     font-weight: 400;
-    color: #8a7664;
+    color: #6c5242;
 }

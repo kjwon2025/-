@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route,useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Popup from './components/Popup';
 import Section from './components/Section';
@@ -35,7 +35,6 @@ import { CartProvider } from "./CartContext";
 import BoardEdit from "./pages/BoardEdit";
 
 
-
 /* 소셜로그인 */
 import SocialLog from "./components/SocialLog";
 import AuthProvider from "./context/SocialLog_data";
@@ -65,13 +64,6 @@ function MainPage() {
 
 function App() {
     const [loginActive, setLoginActive] = useState(false);
-     const location = useLocation();   // ✅ 현재 라우트 상태 읽기
-
-    useEffect(() => {
-        if (location.state?.openLogin) {
-            setLoginActive(true);  // ✅ 로그인 팝업 자동 실행
-        }
-            }, [location]);
 
     return (
         <>
@@ -92,10 +84,10 @@ function App() {
                         <Route path="/MessageCard" element={<MessageCard />} />
                         <Route path="/PaymentCompleted" element={<PaymentCompleted />} />
                         <Route path="/BoardWrite" element={<BoardWrite />} />
-                        <Route path="/BoardEdit/:id" element={<BoardEdit />} />
                         <Route path="/QnA" element={<QnA />} />
                         <Route path="/CategoryDetail" element={<CategoryDetail />} />
                         <Route path="/Community" element={<Community />} />
+                        <Route path="/BoardEdit/:id" element={<BoardEdit />} />
                     </Routes>
 
                     <Footer />

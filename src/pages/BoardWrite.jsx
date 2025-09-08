@@ -50,11 +50,12 @@ const BoardWrite = () => {
     }; */
 
   const savePost = (imageData) => {
+    const shortId = userId.includes("@") ? userId.split("@")[0] : userId; // @앞까지만
     const newPost = {
       title,
       content,
-      productImg: imageData, // ← base64 문자열 또는 기본 이미지 경로
-      name: userId,
+      productImg: imageData,
+      name: shortId, // ✅ 여기서 줄여서 저장
       date: new Date().toISOString().slice(0, 10),
       views: 0,
     };

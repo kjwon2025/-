@@ -64,7 +64,7 @@
     font-size: 20px;
 }
 
-.Esec2inputQA > input[type="password"] {
+.Esec2inputQA>input[type="password"] {
     background-color: #FFFEF8;
 }
 
@@ -74,7 +74,7 @@
     color: #6C5242;
 }
 
-.Esec2inputQA > input {
+.Esec2inputQA>input {
     padding: 10px;
     border: 1px solid #6C5242;
     font-size: 20px;
@@ -134,7 +134,7 @@
     gap: 5px;
 }
 
-.Esec3inputQA > input[type="text"],
+.Esec3inputQA>input[type="text"],
 .Esec3inputQA select,
 .Esec3inputQA textarea {
     width: 600px;
@@ -205,7 +205,8 @@
     align-items: center;
     justify-content: center;
     margin: 50px 0;
-    gap: 20px; /* 수정/삭제 버튼 간격 추가 */
+    gap: 80px;
+    /* 수정/삭제 버튼 간격 추가 */
 }
 
 .Esec5buttomQA {

@@ -7,34 +7,9 @@
 
 #s4MP>h1 {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 80px;
     font-size: 50px;
     color: #6C5242;
-}
-
-.s4instabox {
-    width: 300px;
-    height: 30px;
-    margin: 0 auto 25px auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.s4instaspan1,
-.s4instaspan2 {
-    font-size: 15px;
-    font-weight: 500;
-    color: #6C5242;
-}
-
-.s4instaspan2 {
-    text-decoration: underline;
-}
-
-.s4instaspan2:hover {
-    background-color: #6C5242;
-    color: #FFFEF8;
 }
 
 #s4conMP {
